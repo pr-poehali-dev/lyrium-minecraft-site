@@ -181,14 +181,14 @@ export default function Index() {
               <CardContent className="p-6 space-y-4 relative">
                 <div className="text-center">
                   <img 
-                    src="https://cdn.poehali.dev/files/f4e90f5e-0e02-4a89-b1e0-8bcb0614ceee.jpg" 
+                    src="https://cdn.poehali.dev/files/21c9c387-c6a4-4cc7-b30b-47e8cab985c3.jpg" 
                     alt="Строитель" 
                     className="w-full h-48 object-cover rounded-xl border-2 border-purple-500 shadow-lg shadow-purple-500/50 mb-4"
                   />
                   <Badge className="bg-purple-500/20 text-purple-400 border border-purple-500/50 mb-2">
                     Строитель
                   </Badge>
-                  <h3 className="text-2xl font-heading font-bold text-white">599₽</h3>
+                  <h3 className="text-2xl font-heading font-bold text-white">125₽</h3>
                   <p className="text-gray-400 text-sm">навсегда</p>
                 </div>
 

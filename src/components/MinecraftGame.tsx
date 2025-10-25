@@ -1,15 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import Icon from '@/components/ui/icon';
 
 export default function MinecraftGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-  const [highScore, setHighScore] = useState(0);
+  const [playerName, setPlayerName] = useState('');
+  const [showNameInput, setShowNameInput] = useState(false);
+  const [leaderboard, setLeaderboard] = useState<{ name: string; score: number }[]>([
+    { name: 'Steve', score: 45 },
+    { name: 'Alex', score: 38 },
+    { name: 'Herobrine', score: 32 },
+    { name: 'Creeper', score: 28 },
+    { name: 'Enderman', score: 25 }
+  ]);
+  
   const gameStateRef = useRef({
     playerY: 150,
     playerVelocity: 0,
-    obstacles: [] as { x: number; height: number }[],
+    obstacles: [] as { x: number; height: number; passed?: boolean }[],
     score: 0,
     isJumping: false,
     gameSpeed: 5
@@ -42,13 +53,15 @@ export default function MinecraftGame() {
       };
       setScore(0);
       setGameOver(false);
+      setShowNameInput(false);
     };
 
     const spawnObstacle = () => {
       const height = 30 + Math.random() * 40;
       gameStateRef.current.obstacles.push({
         x: canvas.width,
-        height
+        height,
+        passed: false
       });
     };
 
@@ -84,10 +97,10 @@ export default function MinecraftGame() {
     const gameLoop = () => {
       if (!ctx || !canvas) return;
 
-      ctx.fillStyle = '#87CEEB';
+      ctx.fillStyle = '#000000';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = '#7CFC00';
+      ctx.fillStyle = '#1a0000';
       ctx.fillRect(0, GROUND_Y, canvas.width, canvas.height - GROUND_Y);
 
       const state = gameStateRef.current;
@@ -119,8 +132,8 @@ export default function MinecraftGame() {
             state.playerY + PLAYER_SIZE > GROUND_Y - obstacle.height
           ) {
             setGameOver(true);
-            if (state.score > highScore) {
-              setHighScore(state.score);
+            if (state.score > 0) {
+              setShowNameInput(true);
             }
           }
 
@@ -136,21 +149,21 @@ export default function MinecraftGame() {
         });
       }
 
-      ctx.fillStyle = '#8B4513';
+      ctx.fillStyle = '#2d0000';
       ctx.fillRect(48, state.playerY - 2, PLAYER_SIZE + 4, PLAYER_SIZE + 4);
       
-      ctx.fillStyle = '#00CED1';
+      ctx.fillStyle = '#EF4444';
       ctx.fillRect(50, state.playerY, PLAYER_SIZE, PLAYER_SIZE);
 
-      ctx.fillStyle = '#000';
+      ctx.fillStyle = '#1a1a1a';
       ctx.fillRect(55, state.playerY + 8, 8, 8);
       ctx.fillRect(67, state.playerY + 8, 8, 8);
 
-      ctx.fillStyle = '#8B4513';
+      ctx.fillStyle = '#7f0000';
       ctx.fillRect(60, state.playerY + 20, 10, 4);
 
       state.obstacles.forEach(obstacle => {
-        ctx.fillStyle = '#654321';
+        ctx.fillStyle = '#3d0000';
         ctx.fillRect(
           obstacle.x,
           GROUND_Y - obstacle.height,
@@ -158,7 +171,7 @@ export default function MinecraftGame() {
           obstacle.height
         );
         
-        ctx.fillStyle = '#8B4513';
+        ctx.fillStyle = '#EF4444';
         ctx.fillRect(
           obstacle.x + 5,
           GROUND_Y - obstacle.height,
@@ -168,17 +181,21 @@ export default function MinecraftGame() {
       });
 
       if (gameOver) {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        ctx.fillStyle = '#fff';
+        ctx.fillStyle = '#EF4444';
         ctx.font = 'bold 30px Arial';
         ctx.textAlign = 'center';
         ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 20);
         
+        ctx.fillStyle = '#fff';
         ctx.font = '20px Arial';
         ctx.fillText(`Счёт: ${state.score}`, canvas.width / 2, canvas.height / 2 + 20);
-        ctx.fillText('Нажми SPACE или клик для рестарта', canvas.width / 2, canvas.height / 2 + 50);
+        
+        if (!showNameInput) {
+          ctx.fillText('Нажми SPACE или клик для рестарта', canvas.width / 2, canvas.height / 2 + 50);
+        }
       }
 
       animationFrame = requestAnimationFrame(gameLoop);
@@ -191,36 +208,125 @@ export default function MinecraftGame() {
       window.removeEventListener('keydown', handleKeyDown);
       canvas.removeEventListener('click', handleClick);
     };
-  }, [gameOver, highScore]);
+  }, [gameOver, showNameInput]);
+
+  const saveScore = () => {
+    if (playerName.trim() && score > 0) {
+      const newLeaderboard = [...leaderboard, { name: playerName.trim(), score }]
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 10);
+      setLeaderboard(newLeaderboard);
+      setPlayerName('');
+      setShowNameInput(false);
+    }
+  };
 
   return (
-    <Card className="bg-gradient-to-br from-gray-900 to-black border-2 border-red-500/30">
-      <CardContent className="p-6">
-        <div className="text-center space-y-4">
-          <h3 className="text-2xl font-heading font-bold text-white">
-            🎮 Minecraft Runner
-          </h3>
-          <div className="flex justify-around text-white">
-            <div>
-              <p className="text-sm text-gray-400">Счёт</p>
-              <p className="text-3xl font-bold text-red-500">{score}</p>
+    <div className="space-y-8">
+      <Card className="bg-gradient-to-br from-gray-900 to-black border-2 border-red-500/30">
+        <CardContent className="p-6">
+          <div className="text-center space-y-4">
+            <h3 className="text-2xl font-heading font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
+              🎮 Minecraft Runner
+            </h3>
+            <div className="flex justify-center">
+              <div className="bg-red-950/30 border border-red-500/30 rounded-lg px-6 py-3">
+                <p className="text-sm text-gray-400">Счёт</p>
+                <p className="text-4xl font-bold text-red-500">{score}</p>
+              </div>
             </div>
-            <div>
-              <p className="text-sm text-gray-400">Рекорд</p>
-              <p className="text-3xl font-bold text-yellow-500">{highScore}</p>
-            </div>
+            <canvas
+              ref={canvasRef}
+              width={600}
+              height={300}
+              className="w-full max-w-full border-2 border-red-500/50 rounded-lg"
+            />
+            <p className="text-gray-400 text-sm">
+              Нажми SPACE или кликни для прыжка
+            </p>
+
+            {showNameInput && (
+              <div className="bg-red-950/30 border border-red-500/30 rounded-lg p-4 space-y-3">
+                <p className="text-white font-bold">Сохрани свой результат!</p>
+                <input
+                  type="text"
+                  value={playerName}
+                  onChange={(e) => setPlayerName(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && saveScore()}
+                  placeholder="Введи своё имя"
+                  className="w-full px-4 py-2 bg-black border border-red-500/50 rounded text-white placeholder-gray-500 focus:outline-none focus:border-red-500"
+                  maxLength={20}
+                  autoFocus
+                />
+                <Button
+                  onClick={saveScore}
+                  className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600"
+                >
+                  <Icon name="Trophy" size={18} className="mr-2" />
+                  Сохранить результат
+                </Button>
+              </div>
+            )}
           </div>
-          <canvas
-            ref={canvasRef}
-            width={600}
-            height={300}
-            className="w-full max-w-full border-2 border-red-500/50 rounded-lg bg-sky-400"
-          />
-          <p className="text-gray-400 text-sm">
-            Нажми SPACE или кликни для прыжка
-          </p>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+
+      <Card className="bg-gradient-to-br from-gray-900 to-black border-2 border-red-500/30">
+        <CardContent className="p-6">
+          <h3 className="text-2xl font-heading font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mb-6 text-center">
+            🏆 Таблица лидеров
+          </h3>
+          <div className="space-y-2">
+            {leaderboard.map((entry, index) => (
+              <div
+                key={index}
+                className={`flex items-center justify-between p-3 rounded-lg border ${
+                  index === 0
+                    ? 'bg-yellow-950/20 border-yellow-500/30'
+                    : index === 1
+                    ? 'bg-gray-700/20 border-gray-400/30'
+                    : index === 2
+                    ? 'bg-orange-950/20 border-orange-700/30'
+                    : 'bg-red-950/20 border-red-500/20'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${
+                      index === 0
+                        ? 'bg-yellow-500/20 text-yellow-500'
+                        : index === 1
+                        ? 'bg-gray-400/20 text-gray-400'
+                        : index === 2
+                        ? 'bg-orange-700/20 text-orange-700'
+                        : 'bg-red-500/20 text-red-500'
+                    }`}
+                  >
+                    {index + 1}
+                  </div>
+                  <span className="text-white font-medium">{entry.name}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl font-bold text-red-500">{entry.score}</span>
+                  {index < 3 && (
+                    <Icon
+                      name="Trophy"
+                      size={20}
+                      className={
+                        index === 0
+                          ? 'text-yellow-500'
+                          : index === 1
+                          ? 'text-gray-400'
+                          : 'text-orange-700'
+                      }
+                    />
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
