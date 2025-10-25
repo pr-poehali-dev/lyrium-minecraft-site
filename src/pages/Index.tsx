@@ -78,7 +78,7 @@ export default function Index() {
                 </h1>
                 
                 <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto">
-                  Лучший приватный сервер с валютой
+                  Лучший приватный сервер в Minecraft с валютой и магазинами! Доброе комьюнити только у нас!
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
