@@ -190,7 +190,7 @@ export default function Index() {
                 <div className="space-y-3">
                   <div className="flex items-start gap-2">
                     <Icon name="Check" size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
-                    <span className="text-gray-300">Префикс [EVERYFLY]</span>
+                    <span className="text-gray-300">Префикс ➹</span>
                   </div>
 
                   <div className="flex items-start gap-2">
