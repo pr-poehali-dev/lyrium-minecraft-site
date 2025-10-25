@@ -60,7 +60,7 @@ export default function Index() {
                 onClick={handleRules}
                 variant="outline" 
                 size="sm"
-                className="border-red-500/50 text-red-500 hover:bg-red-500/10"
+                className="border-red-500/50 text-red-500 hover:bg-red-500/10 transition-all hover:scale-105 hover:shadow-lg hover:shadow-red-500/20"
               >
                 <Icon name="Book" size={16} className="mr-1 md:mr-2" />
                 Правила
@@ -112,7 +112,7 @@ export default function Index() {
                   <Button 
                     size="lg" 
                     onClick={copyIP}
-                    className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold text-lg px-8 py-6 shadow-lg shadow-red-500/50 animate-scale-in"
+                    className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold text-lg px-8 py-6 shadow-lg shadow-red-500/50 animate-scale-in transition-all hover:scale-110 hover:shadow-2xl hover:shadow-red-500/60"
                   >
                     <Icon name={copied ? "Check" : "Copy"} size={20} className="mr-2" />
                     {copied ? 'Скопировано!' : 'Копировать IP'}
@@ -274,7 +274,7 @@ export default function Index() {
                   <img 
                     src="https://cdn.poehali.dev/files/cbd7462c-d182-41c6-8685-c9202d5ce61b.jpg" 
                     alt="Посейдон" 
-                    className="w-full h-48 object-cover rounded-xl border-2 border-blue-500 shadow-lg shadow-blue-500/50 mb-4"
+                    className="w-full h-48 object-contain rounded-xl border-2 border-blue-500 shadow-lg shadow-blue-500/50 mb-4 bg-gradient-to-br from-blue-950/30 to-black"
                   />
                   <Badge className="bg-blue-500/20 text-blue-400 border border-blue-500/50 mb-2">
                     Посейдон
