@@ -93,6 +93,12 @@ export default function Index() {
                   Лучший приватный сервер в Minecraft с валютой и магазинами! Доброе комьюнити только у нас!
                 </p>
 
+                <div className="inline-block mt-4">
+                  <Badge className="bg-red-500/20 text-red-400 border border-red-500/50 text-lg px-4 py-2">
+                    Версия: 1.17
+                  </Badge>
+                </div>
+
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
                   <div className="bg-gradient-to-r from-red-950/50 to-black border-2 border-red-500/30 rounded-xl px-8 py-4 font-mono text-xl backdrop-blur-sm">
                     <div className="text-red-500 text-sm mb-1">IP АДРЕС СЕРВЕРА:</div>
