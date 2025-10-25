@@ -18,7 +18,7 @@ export default function Index() {
   };
 
   const handleRules = () => {
-    window.open('https://t.me/+AoYEDChPREJkMjg6', '_blank');
+    window.open('https://t.me/+38RvWeEJmstjMmQy', '_blank');
   };
 
   const handleChat = () => {
