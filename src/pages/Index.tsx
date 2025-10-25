@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import MinecraftGame from '@/components/MinecraftGame';
+import ModeratorApplication from '@/components/ModeratorApplication';
 
 export default function Index() {
   const [copied, setCopied] = useState(false);
@@ -416,6 +417,10 @@ export default function Index() {
 
         <section className="container mx-auto px-4 py-16">
           <MinecraftGame />
+        </section>
+
+        <section className="container mx-auto px-4 py-16">
+          <ModeratorApplication />
         </section>
       </main>
 
