@@ -8,23 +8,16 @@ export default function MinecraftGame() {
   const [score, setScore] = useState(0);
   const [coins, setCoins] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-  const [playerName, setPlayerName] = useState('');
-  const [showNameInput, setShowNameInput] = useState(false);
   const [showPrefixShop, setShowPrefixShop] = useState(false);
   const [prefixCode, setPrefixCode] = useState('');
   const [codeCopied, setCodeCopied] = useState(false);
-  const [leaderboard, setLeaderboard] = useState<{ name: string; score: number }[]>([
-    { name: 'Steve', score: 45 },
-    { name: 'Alex', score: 38 },
-    { name: 'Herobrine', score: 32 },
-    { name: 'Creeper', score: 28 },
-    { name: 'Enderman', score: 25 }
-  ]);
+  const [pickaxeClicked, setPickaxeClicked] = useState(false);
   
   const gameStateRef = useRef({
     playerY: 150,
     playerVelocity: 0,
     obstacles: [] as { x: number; height: number; passed?: boolean }[],
+    walls: [] as { x: number; y: number; health: number }[],
     score: 0,
     isJumping: false,
     gameSpeed: 5
@@ -42,22 +35,24 @@ export default function MinecraftGame() {
     const PLAYER_SIZE = 40;
     const GROUND_Y = 250;
     const OBSTACLE_WIDTH = 30;
+    const WALL_SIZE = 50;
 
     let animationFrame: number;
     let obstacleSpawnTimer = 0;
+    let wallSpawnTimer = 0;
 
     const resetGame = () => {
       gameStateRef.current = {
         playerY: GROUND_Y - PLAYER_SIZE,
         playerVelocity: 0,
         obstacles: [],
+        walls: [],
         score: 0,
         isJumping: false,
         gameSpeed: 5
       };
       setScore(0);
       setGameOver(false);
-      setShowNameInput(false);
     };
 
     const spawnObstacle = () => {
@@ -66,6 +61,15 @@ export default function MinecraftGame() {
         x: canvas.width,
         height,
         passed: false
+      });
+    };
+
+    const spawnWall = () => {
+      const y = GROUND_Y - WALL_SIZE - Math.random() * 100;
+      gameStateRef.current.walls.push({
+        x: canvas.width,
+        y,
+        health: 3
       });
     };
 
@@ -125,7 +129,14 @@ export default function MinecraftGame() {
           obstacleSpawnTimer = 0;
         }
 
+        wallSpawnTimer++;
+        if (wallSpawnTimer > 150) {
+          spawnWall();
+          wallSpawnTimer = 0;
+        }
+
         state.obstacles = state.obstacles.filter(obs => obs.x > -OBSTACLE_WIDTH);
+        state.walls = state.walls.filter(wall => wall.x > -WALL_SIZE && wall.health > 0);
 
         state.obstacles.forEach(obstacle => {
           obstacle.x -= state.gameSpeed;
@@ -136,9 +147,6 @@ export default function MinecraftGame() {
             state.playerY + PLAYER_SIZE > GROUND_Y - obstacle.height
           ) {
             setGameOver(true);
-            if (state.score > 0) {
-              setShowNameInput(true);
-            }
           }
 
           if (obstacle.x + OBSTACLE_WIDTH < 50 && !obstacle.passed) {
@@ -153,6 +161,19 @@ export default function MinecraftGame() {
             if (state.score % 10 === 0) {
               state.gameSpeed += 0.5;
             }
+          }
+        });
+
+        state.walls.forEach(wall => {
+          wall.x -= state.gameSpeed;
+
+          if (
+            50 + PLAYER_SIZE > wall.x &&
+            50 < wall.x + WALL_SIZE &&
+            state.playerY + PLAYER_SIZE > wall.y &&
+            state.playerY < wall.y + WALL_SIZE
+          ) {
+            setGameOver(true);
           }
         });
       }
@@ -188,6 +209,29 @@ export default function MinecraftGame() {
         );
       });
 
+      state.walls.forEach(wall => {
+        const alpha = wall.health / 3;
+        ctx.fillStyle = `rgba(128, 128, 128, ${alpha})`;
+        ctx.fillRect(wall.x, wall.y, WALL_SIZE, WALL_SIZE);
+        
+        ctx.fillStyle = `rgba(96, 96, 96, ${alpha})`;
+        for (let i = 0; i < 3; i++) {
+          for (let j = 0; j < 3; j++) {
+            ctx.fillRect(
+              wall.x + i * 17 + 2,
+              wall.y + j * 17 + 2,
+              14,
+              14
+            );
+          }
+        }
+        
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 20px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(wall.health.toString(), wall.x + WALL_SIZE / 2, wall.y + WALL_SIZE / 2 + 7);
+      });
+
       if (gameOver) {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -200,10 +244,7 @@ export default function MinecraftGame() {
         ctx.fillStyle = '#fff';
         ctx.font = '20px Arial';
         ctx.fillText(`Счёт: ${state.score}`, canvas.width / 2, canvas.height / 2 + 20);
-        
-        if (!showNameInput) {
-          ctx.fillText('Нажми SPACE или клик для рестарта', canvas.width / 2, canvas.height / 2 + 50);
-        }
+        ctx.fillText('Нажми SPACE или клик для рестарта', canvas.width / 2, canvas.height / 2 + 50);
       }
 
       animationFrame = requestAnimationFrame(gameLoop);
@@ -216,16 +257,25 @@ export default function MinecraftGame() {
       window.removeEventListener('keydown', handleKeyDown);
       canvas.removeEventListener('click', handleClick);
     };
-  }, [gameOver, showNameInput]);
+  }, [gameOver]);
 
-  const saveScore = () => {
-    if (playerName.trim() && score > 0) {
-      const newLeaderboard = [...leaderboard, { name: playerName.trim(), score }]
-        .sort((a, b) => b.score - a.score)
-        .slice(0, 10);
-      setLeaderboard(newLeaderboard);
-      setPlayerName('');
-      setShowNameInput(false);
+  const handlePickaxeClick = () => {
+    if (gameOver) return;
+    
+    setPickaxeClicked(true);
+    setTimeout(() => setPickaxeClicked(false), 200);
+
+    const state = gameStateRef.current;
+    const closestWall = state.walls.find(
+      wall => wall.x > 30 && wall.x < 150
+    );
+
+    if (closestWall) {
+      closestWall.health--;
+      if (closestWall.health <= 0) {
+        setScore(prev => prev + 5);
+        setCoins(prev => prev + 2);
+      }
     }
   };
 
@@ -267,136 +317,76 @@ export default function MinecraftGame() {
               ref={canvasRef}
               width={600}
               height={300}
-              className="w-full max-w-full border-2 border-red-500/50 rounded-lg"
+              className="w-full max-w-2xl mx-auto border-2 border-red-500/50 rounded-lg bg-black cursor-pointer"
             />
-            <div className="space-y-2">
-              <p className="text-gray-400 text-sm">
-                Нажми SPACE или кликни для прыжка
-              </p>
-              <p className="text-yellow-400 text-sm font-medium">
-                ⚡ За каждые 5 очков = 1 монета
-              </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4 items-center">
               <Button
-                onClick={buyPrefix}
-                disabled={coins < 20}
-                className="bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-500 hover:to-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={handlePickaxeClick}
+                disabled={gameOver}
+                className={`bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-500 hover:to-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-transform ${
+                  pickaxeClicked ? 'scale-90' : 'scale-100'
+                }`}
               >
-                <Icon name="Star" size={18} className="mr-2" />
-                Купить префикс ✢ (20 монет)
+                <Icon name="Pickaxe" size={20} className="mr-2" />
+                Ломать стенки (⛏️)
               </Button>
+              <p className="text-gray-400 text-sm">
+                Используй SPACE или клик для прыжка
+              </p>
             </div>
 
-            {showPrefixShop && (
-              <div className="bg-yellow-950/30 border border-yellow-500/30 rounded-lg p-4 space-y-3">
-                <div className="text-center space-y-2">
-                  <Icon name="Star" size={32} className="text-yellow-500 mx-auto" />
-                  <p className="text-white font-bold text-lg">Префикс ✢ куплен!</p>
-                  <div className="bg-black border border-yellow-500/50 rounded-lg p-3">
-                    <p className="text-gray-400 text-sm mb-2">Твой код:</p>
-                    <p className="text-yellow-500 text-2xl font-mono font-bold">{prefixCode}</p>
+            {!showPrefixShop ? (
+              <div className="bg-gradient-to-r from-yellow-950/30 to-black border-2 border-yellow-500/30 rounded-lg p-4">
+                <div className="flex items-center justify-between flex-wrap gap-4">
+                  <div>
+                    <h4 className="text-yellow-500 font-bold text-lg">🎁 Магазин префиксов</h4>
+                    <p className="text-gray-400 text-sm">Обменяй монеты на уникальный префикс для сервера</p>
                   </div>
+                  <Button
+                    onClick={buyPrefix}
+                    disabled={coins < 20}
+                    className="bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-500 hover:to-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <Icon name="ShoppingCart" size={18} className="mr-2" />
+                    Купить за 20 монет
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <div className="bg-gradient-to-r from-green-950/30 to-black border-2 border-green-500/30 rounded-lg p-4 space-y-3">
+                <Icon name="CheckCircle" size={48} className="text-green-500 mx-auto" />
+                <h4 className="text-green-400 font-bold text-lg">🎉 Поздравляем!</h4>
+                <p className="text-white">Ваш код префикса:</p>
+                <div className="bg-black border border-green-500/30 rounded-lg p-3">
+                  <code className="text-green-400 text-xl font-mono font-bold">{prefixCode}</code>
                 </div>
                 <Button
                   onClick={copyCode}
-                  className="w-full bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-500 hover:to-yellow-600"
+                  className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600"
                 >
                   <Icon name={codeCopied ? "Check" : "Copy"} size={18} className="mr-2" />
                   {codeCopied ? 'Скопировано!' : 'Скопировать код'}
                 </Button>
-                <div className="bg-red-950/30 border border-red-500/30 rounded-lg p-3">
-                  <p className="text-white text-sm">
-                    📌 Чтобы получить префикс, напиши код в <a href="https://t.me/LyriumMine" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 underline">@LyriumMine</a>
-                  </p>
-                </div>
+                <p className="text-gray-400 text-sm">
+                  📱 Отправьте этот код администратору{' '}
+                  <a
+                    href="https://t.me/LyriumMine"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-green-400 hover:text-green-300 underline"
+                  >
+                    @LyriumMine
+                  </a>
+                </p>
                 <Button
                   onClick={() => setShowPrefixShop(false)}
                   variant="outline"
-                  className="w-full border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10"
+                  className="w-full border-green-500/50 text-green-500 hover:bg-green-500/10"
                 >
                   Закрыть
                 </Button>
               </div>
             )}
-
-            {showNameInput && (
-              <div className="bg-red-950/30 border border-red-500/30 rounded-lg p-4 space-y-3">
-                <p className="text-white font-bold">Сохрани свой результат!</p>
-                <input
-                  type="text"
-                  value={playerName}
-                  onChange={(e) => setPlayerName(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && saveScore()}
-                  placeholder="Введи своё имя"
-                  className="w-full px-4 py-2 bg-black border border-red-500/50 rounded text-white placeholder-gray-500 focus:outline-none focus:border-red-500"
-                  maxLength={20}
-                  autoFocus
-                />
-                <Button
-                  onClick={saveScore}
-                  className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600"
-                >
-                  <Icon name="Trophy" size={18} className="mr-2" />
-                  Сохранить результат
-                </Button>
-              </div>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card className="bg-gradient-to-br from-gray-900 to-black border-2 border-red-500/30">
-        <CardContent className="p-6">
-          <h3 className="text-2xl font-heading font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mb-6 text-center">
-            🏆 Таблица лидеров
-          </h3>
-          <div className="space-y-2">
-            {leaderboard.map((entry, index) => (
-              <div
-                key={index}
-                className={`flex items-center justify-between p-3 rounded-lg border ${
-                  index === 0
-                    ? 'bg-yellow-950/20 border-yellow-500/30'
-                    : index === 1
-                    ? 'bg-gray-700/20 border-gray-400/30'
-                    : index === 2
-                    ? 'bg-orange-950/20 border-orange-700/30'
-                    : 'bg-red-950/20 border-red-500/20'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${
-                      index === 0
-                        ? 'bg-yellow-500/20 text-yellow-500'
-                        : index === 1
-                        ? 'bg-gray-400/20 text-gray-400'
-                        : index === 2
-                        ? 'bg-orange-700/20 text-orange-700'
-                        : 'bg-red-500/20 text-red-500'
-                    }`}
-                  >
-                    {index + 1}
-                  </div>
-                  <span className="text-white font-medium">{entry.name}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-2xl font-bold text-red-500">{entry.score}</span>
-                  {index < 3 && (
-                    <Icon
-                      name="Trophy"
-                      size={20}
-                      className={
-                        index === 0
-                          ? 'text-yellow-500'
-                          : index === 1
-                          ? 'text-gray-400'
-                          : 'text-orange-700'
-                      }
-                    />
-                  )}
-                </div>
-              </div>
-            ))}
           </div>
         </CardContent>
       </Card>

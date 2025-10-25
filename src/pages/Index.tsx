@@ -143,7 +143,7 @@ export default function Index() {
                   <img 
                     src="https://cdn.poehali.dev/files/529276fb-e401-4762-8426-dfeb7dccfc39.jpg" 
                     alt="Premium" 
-                    className="w-full h-48 object-cover rounded-xl border-2 border-purple-500 shadow-lg shadow-purple-500/50 mb-4"
+                    className="w-full h-48 object-contain rounded-xl border-2 border-purple-500 shadow-lg shadow-purple-500/50 mb-4 bg-gradient-to-br from-purple-950/30 to-black"
                   />
                   <Badge className="bg-purple-500/20 text-purple-400 border border-purple-500/50 mb-2">
                     Premium
@@ -184,7 +184,7 @@ export default function Index() {
                   <img 
                     src="https://cdn.poehali.dev/files/21c9c387-c6a4-4cc7-b30b-47e8cab985c3.jpg" 
                     alt="Строитель" 
-                    className="w-full h-48 object-cover rounded-xl border-2 border-purple-500 shadow-lg shadow-purple-500/50 mb-4"
+                    className="w-full h-48 object-contain rounded-xl border-2 border-purple-500 shadow-lg shadow-purple-500/50 mb-4 bg-gradient-to-br from-purple-950/30 to-black"
                   />
                   <Badge className="bg-purple-500/20 text-purple-400 border border-purple-500/50 mb-2">
                     Строитель
@@ -229,7 +229,7 @@ export default function Index() {
                   <img 
                     src="https://cdn.poehali.dev/files/8f712e9d-950b-4e99-a7b9-4585b3c48f76.jpg" 
                     alt="Воин" 
-                    className="w-full h-48 object-cover rounded-xl border-2 border-red-500 shadow-lg shadow-red-500/50 mb-4"
+                    className="w-full h-48 object-contain rounded-xl border-2 border-red-500 shadow-lg shadow-red-500/50 mb-4 bg-gradient-to-br from-red-950/30 to-black"
                   />
                   <Badge className="bg-red-500/20 text-red-400 border border-red-500/50 mb-2">
                     Воин
@@ -324,7 +324,7 @@ export default function Index() {
                   <img 
                     src="https://cdn.poehali.dev/files/38fb2a9a-f34f-4440-875f-1069d481d322.jpg" 
                     alt="EveryFly" 
-                    className="w-full h-48 object-cover rounded-xl border-2 border-yellow-500 shadow-lg shadow-yellow-500/50 mb-4"
+                    className="w-full h-48 object-contain rounded-xl border-2 border-yellow-500 shadow-lg shadow-yellow-500/50 mb-4 bg-gradient-to-br from-yellow-950/30 to-black"
                   />
                   <Badge className="bg-yellow-500/20 text-yellow-400 border border-yellow-500/50 mb-2">
                     EveryFly
@@ -381,39 +381,7 @@ export default function Index() {
           </Card>
         </section>
 
-        <section className="container mx-auto px-4 py-16">
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <Card className="bg-gradient-to-br from-gray-900 to-black border border-red-500/20 hover:border-red-500/40 transition-all hover:scale-105">
-              <CardContent className="p-6 text-center space-y-3">
-                <div className="mx-auto w-14 h-14 rounded-full bg-red-500/20 flex items-center justify-center border border-red-500/30">
-                  <Icon name="Users" size={28} className="text-red-500" />
-                </div>
-                <p className="text-3xl font-heading font-bold text-white">0/20</p>
-                <p className="text-gray-400">Игроков онлайн</p>
-              </CardContent>
-            </Card>
 
-            <Card className="bg-gradient-to-br from-gray-900 to-black border border-red-500/20 hover:border-red-500/40 transition-all hover:scale-105">
-              <CardContent className="p-6 text-center space-y-3">
-                <div className="mx-auto w-14 h-14 rounded-full bg-red-500/20 flex items-center justify-center border border-red-500/30">
-                  <Icon name="Zap" size={28} className="text-red-500" />
-                </div>
-                <p className="text-3xl font-heading font-bold text-white">1.17</p>
-                <p className="text-gray-400">Версия</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-gray-900 to-black border border-red-500/20 hover:border-red-500/40 transition-all hover:scale-105">
-              <CardContent className="p-6 text-center space-y-3">
-                <div className="mx-auto w-14 h-14 rounded-full bg-red-500/20 flex items-center justify-center border border-red-500/30">
-                  <Icon name="Globe" size={28} className="text-red-500" />
-                </div>
-                <p className="text-3xl font-heading font-bold text-white">RU</p>
-                <p className="text-gray-400">Регион</p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
 
         <section className="container mx-auto px-4 py-16">
           <MinecraftGame />
