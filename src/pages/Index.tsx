@@ -96,6 +96,12 @@ export default function Index() {
                   Лучший приватный сервер в Minecraft с валютой и магазинами! Доброе комьюнити только у нас!
                 </p>
 
+                <div className="inline-block mt-4">
+                  <Badge className="bg-red-500/20 text-red-400 border border-red-500/50 text-lg px-4 py-2">
+                    Версия: 1.17
+                  </Badge>
+                </div>
+
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
                   <div className="bg-gradient-to-r from-red-950/50 to-black border-2 border-red-500/30 rounded-xl px-8 py-4 font-mono text-xl backdrop-blur-sm">
                     <div className="text-red-500 text-sm mb-1">IP АДРЕС СЕРВЕРА:</div>
@@ -127,107 +133,89 @@ export default function Index() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
-            <Card className="relative bg-gradient-to-br from-gray-900 via-blue-950/20 to-black border-2 border-blue-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <CardContent className="p-8 space-y-6 relative">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <Badge className="bg-blue-500/20 text-blue-400 border border-blue-500/50 mb-3">
-                      Посейдон
-                    </Badge>
-                    <h3 className="text-3xl font-heading font-bold text-white">1,599₽</h3>
-                    <p className="text-gray-400">навсегда</p>
-                  </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
+            <Card className="relative bg-gradient-to-br from-gray-900 via-purple-950/20 to-black border-2 border-purple-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <CardContent className="p-6 space-y-4 relative">
+                <div className="text-center">
                   <img 
-                    src="https://cdn.poehali.dev/files/cbd7462c-d182-41c6-8685-c9202d5ce61b.jpg" 
-                    alt="Посейдон" 
-                    className="w-24 h-24 rounded-xl border-2 border-blue-500 shadow-lg shadow-blue-500/50"
+                    src="https://cdn.poehali.dev/files/529276fb-e401-4762-8426-dfeb7dccfc39.jpg" 
+                    alt="Premium" 
+                    className="w-full h-48 object-cover rounded-xl border-2 border-purple-500 shadow-lg shadow-purple-500/50 mb-4"
                   />
+                  <Badge className="bg-purple-500/20 text-purple-400 border border-purple-500/50 mb-2">
+                    Premium
+                  </Badge>
+                  <h3 className="text-2xl font-heading font-bold text-white">45₽</h3>
+                  <p className="text-gray-400 text-sm">навсегда</p>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-2">
                   <div className="flex items-start gap-2">
-                    <Icon name="Check" size={18} className="text-blue-400 mt-1 flex-shrink-0" />
-                    <span className="text-gray-300">Префикс ✮</span>
+                    <Icon name="Check" size={16} className="text-purple-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Префикс ❊ в чате</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <Icon name="Check" size={18} className="text-blue-400 mt-1 flex-shrink-0" />
-                    <span className="text-gray-300">Уникальные водные способности</span>
+                    <Icon name="Check" size={16} className="text-purple-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Доступ к /tpa</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <Icon name="Check" size={18} className="text-blue-400 mt-1 flex-shrink-0" />
-                    <span className="text-gray-300">Дыхание под водой</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <Icon name="Check" size={18} className="text-blue-400 mt-1 flex-shrink-0" />
-                    <span className="text-gray-300">Трезубец Посейдона</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <Icon name="Check" size={18} className="text-blue-400 mt-1 flex-shrink-0" />
-                    <span className="text-gray-300">Быстрое плавание</span>
+                    <Icon name="Check" size={16} className="text-purple-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Особый кит</span>
                   </div>
                 </div>
 
                 <Button 
                   onClick={handleDonate}
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold text-lg py-6 shadow-lg shadow-blue-500/50"
+                  className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-bold py-5 shadow-lg shadow-purple-500/50"
                 >
-                  <Icon name="ShoppingCart" size={20} className="mr-2" />
-                  Купить Посейдон
+                  <Icon name="ShoppingCart" size={18} className="mr-2" />
+                  Купить Premium
                 </Button>
               </CardContent>
             </Card>
 
-            <Card className="relative bg-gradient-to-br from-gray-900 via-yellow-950/20 to-black border-2 border-yellow-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-              <div className="absolute top-0 right-0">
-                <Badge className="bg-gradient-to-r from-red-500 to-yellow-500 text-white border-0 rounded-tl-none rounded-br-none px-4 py-2">
-                  ТОП ВЫБОР
-                </Badge>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <CardContent className="p-8 space-y-6 relative">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <Badge className="bg-yellow-500/20 text-yellow-400 border border-yellow-500/50 mb-3">
-                      EveryFly
-                    </Badge>
-                    <h3 className="text-3xl font-heading font-bold text-white">1,799₽</h3>
-                    <p className="text-gray-400">навсегда</p>
-                  </div>
+            <Card className="relative bg-gradient-to-br from-gray-900 via-red-950/20 to-black border-2 border-red-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <CardContent className="p-6 space-y-4 relative">
+                <div className="text-center">
                   <img 
-                    src="https://cdn.poehali.dev/files/38fb2a9a-f34f-4440-875f-1069d481d322.jpg" 
-                    alt="EveryFly" 
-                    className="w-24 h-24 rounded-xl border-2 border-yellow-500 shadow-lg shadow-yellow-500/50"
+                    src="https://cdn.poehali.dev/files/8f712e9d-950b-4e99-a7b9-4585b3c48f76.jpg" 
+                    alt="Воин" 
+                    className="w-full h-48 object-cover rounded-xl border-2 border-red-500 shadow-lg shadow-red-500/50 mb-4"
                   />
+                  <Badge className="bg-red-500/20 text-red-400 border border-red-500/50 mb-2">
+                    Воин
+                  </Badge>
+                  <h3 className="text-2xl font-heading font-bold text-white">98₽</h3>
+                  <p className="text-gray-400 text-sm">навсегда</p>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-2">
                   <div className="flex items-start gap-2">
-                    <Icon name="Check" size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
-                    <span className="text-gray-300">Префикс ➹</span>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <Icon name="Check" size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
-                    <span className="text-gray-300">Королевские крылья</span>
+                    <Icon name="Check" size={16} className="text-red-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Префикс ☭ в чате</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <Icon name="Check" size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
-                    <span className="text-gray-300">Уникальные эффекты полёта</span>
+                    <Icon name="Check" size={16} className="text-red-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Уникальный кит</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <Icon name="Check" size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
-                    <span className="text-gray-300">Доступ к эксклюзивным зонам</span>
+                    <Icon name="Check" size={16} className="text-red-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Уникальный меч</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-red-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Уникальные команды</span>
                   </div>
                 </div>
 
                 <Button 
                   onClick={handleDonate}
-                  className="w-full bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-500 hover:to-yellow-600 text-white font-bold text-lg py-6 shadow-lg shadow-yellow-500/50"
+                  className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold py-5 shadow-lg shadow-red-500/50"
                 >
-                  <Icon name="ShoppingCart" size={20} className="mr-2" />
-                  Купить EveryFly
+                  <Icon name="ShoppingCart" size={18} className="mr-2" />
+                  Купить Воин
                 </Button>
               </CardContent>
             </Card>
@@ -268,7 +256,7 @@ export default function Index() {
                 <div className="mx-auto w-14 h-14 rounded-full bg-red-500/20 flex items-center justify-center border border-red-500/30">
                   <Icon name="Zap" size={28} className="text-red-500" />
                 </div>
-                <p className="text-3xl font-heading font-bold text-white">1.20.1</p>
+                <p className="text-3xl font-heading font-bold text-white">1.17</p>
                 <p className="text-gray-400">Версия</p>
               </CardContent>
             </Card>
