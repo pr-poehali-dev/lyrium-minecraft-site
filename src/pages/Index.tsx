@@ -2,404 +2,315 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Icon from '@/components/ui/icon';
 
 export default function Index() {
-  const [activeSection, setActiveSection] = useState('home');
+  const [copied, setCopied] = useState(false);
+
+  const copyIP = () => {
+    navigator.clipboard.writeText('LyriumMine.aternos.me:19305');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleDonate = () => {
+    window.open('https://t.me/LyriumMine', '_blank');
+  };
+
+  const handleRules = () => {
+    window.open('https://t.me/+AoYEDChPREJkMjg6', '_blank');
+  };
 
   return (
-    <div className="min-h-screen bg-background">
-      <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+    <div className="min-h-screen bg-black text-white">
+      <div className="fixed inset-0 bg-gradient-to-b from-red-950/20 via-black to-black pointer-events-none" />
+      
+      <nav className="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-xl border-b border-red-900/30">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center animate-glow">
-                <span className="text-2xl">⚡</span>
-              </div>
-              <span className="text-2xl font-heading font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Lyrium
+            <div className="flex items-center gap-3">
+              <img 
+                src="https://cdn.poehali.dev/files/6aaa4688-5762-4d13-96c1-778a00a8f135.jpg" 
+                alt="Lyrium Logo" 
+                className="w-12 h-12 rounded-lg border-2 border-red-500 animate-glow"
+              />
+              <span className="text-3xl font-heading font-bold bg-gradient-to-r from-red-500 via-red-600 to-red-500 bg-clip-text text-transparent">
+                LYRIUM
               </span>
             </div>
             
-            <div className="hidden md:flex gap-6">
-              {['home', 'donate', 'rules'].map((section) => (
-                <button
-                  key={section}
-                  onClick={() => setActiveSection(section)}
-                  className={`font-medium transition-all ${
-                    activeSection === section
-                      ? 'text-primary'
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                >
-                  {section === 'home' ? 'Главная' : section === 'donate' ? 'Донат' : 'Правила'}
-                </button>
-              ))}
+            <div className="flex gap-4">
+              <Button 
+                onClick={handleRules}
+                variant="outline" 
+                className="border-red-500/50 text-red-500 hover:bg-red-500/10"
+              >
+                <Icon name="Book" size={16} className="mr-2" />
+                Правила
+              </Button>
             </div>
-
-            <Button className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
-              <Icon name="Users" size={16} className="mr-2" />
-              Войти
-            </Button>
           </div>
         </div>
       </nav>
 
-      <main className="pt-20">
-        {activeSection === 'home' && <HomeSection />}
-        {activeSection === 'donate' && <DonateSection />}
-        {activeSection === 'rules' && <RulesSection />}
-      </main>
+      <main className="relative pt-20">
+        <section className="relative overflow-hidden py-20">
+          <div className="absolute inset-0">
+            <div className="absolute top-20 left-1/4 w-96 h-96 bg-red-500/10 rounded-full blur-3xl animate-pulse-red" />
+            <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-red-600/10 rounded-full blur-3xl animate-pulse-red" style={{ animationDelay: '1s' }} />
+          </div>
+          
+          <div className="container mx-auto px-4 py-16 relative">
+            <div className="max-w-5xl mx-auto space-y-12 animate-fade-in">
+              <div className="text-center space-y-6">
+                <div className="inline-block">
+                  <img 
+                    src="https://cdn.poehali.dev/files/6aaa4688-5762-4d13-96c1-778a00a8f135.jpg" 
+                    alt="Lyrium Server Logo" 
+                    className="w-48 h-48 mx-auto rounded-2xl border-4 border-red-500 shadow-2xl shadow-red-500/50 animate-float"
+                  />
+                </div>
+                
+                <h1 className="text-7xl md:text-9xl font-heading font-black tracking-tight">
+                  <span className="bg-gradient-to-b from-red-400 via-red-500 to-red-700 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(239,68,68,0.5)]">
+                    LYRIUM
+                  </span>
+                </h1>
+                
+                <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto">
+                  Легендарный Minecraft сервер с уникальными механиками и атмосферой
+                </p>
 
-      <footer className="mt-20 border-t border-border py-8">
-        <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p>© 2025 Lyrium Server. Все права защищены.</p>
-        </div>
-      </footer>
-    </div>
-  );
-}
-
-function HomeSection() {
-  const stats = [
-    { label: 'Игроков онлайн', value: '248', icon: 'Users' },
-    { label: 'Всего игроков', value: '12,847', icon: 'TrendingUp' },
-    { label: 'Аптайм', value: '99.9%', icon: 'Zap' },
-  ];
-
-  return (
-    <div className="space-y-20">
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-transparent" />
-        <div className="container mx-auto px-4 py-32 relative">
-          <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
-            <Badge className="bg-primary/20 text-primary border-primary/30">
-              <Icon name="Sparkles" size={14} className="mr-1" />
-              Версия 1.20.1
-            </Badge>
-            
-            <h1 className="text-6xl md:text-8xl font-heading font-bold">
-              <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
-                Lyrium
-              </span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-              Погрузись в уникальный мир приключений, кастомных механик и дружного комьюнити
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <div className="bg-card border border-border rounded-lg px-6 py-3 font-mono text-lg">
-                play.lyrium.ru
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
+                  <div className="bg-gradient-to-r from-red-950/50 to-black border-2 border-red-500/30 rounded-xl px-8 py-4 font-mono text-xl backdrop-blur-sm">
+                    <div className="text-red-500 text-sm mb-1">IP АДРЕС СЕРВЕРА:</div>
+                    <div className="text-white font-bold">LyriumMine.aternos.me:19305</div>
+                  </div>
+                  <Button 
+                    size="lg" 
+                    onClick={copyIP}
+                    className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold text-lg px-8 py-6 shadow-lg shadow-red-500/50 animate-scale-in"
+                  >
+                    <Icon name={copied ? "Check" : "Copy"} size={20} className="mr-2" />
+                    {copied ? 'Скопировано!' : 'Копировать IP'}
+                  </Button>
+                </div>
               </div>
-              <Button size="lg" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 animate-scale-in">
-                <Icon name="Copy" size={18} className="mr-2" />
-                Копировать IP
-              </Button>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="container mx-auto px-4">
-        <div className="grid md:grid-cols-3 gap-6">
-          {stats.map((stat, index) => (
-            <Card key={index} className="border-border bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all hover:scale-105 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-              <CardContent className="p-6 text-center space-y-2">
-                <div className="mx-auto w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                  <Icon name={stat.icon as any} size={24} className="text-primary" />
+        <section className="container mx-auto px-4 py-16">
+          <div className="max-w-3xl mx-auto mb-12">
+            <Card className="bg-gradient-to-br from-gray-900 to-black border-2 border-red-500/30 overflow-hidden">
+              <CardContent className="p-8">
+                <div className="flex flex-col md:flex-row items-center gap-6">
+                  <img 
+                    src="https://cdn.poehali.dev/files/cbd7462c-d182-41c6-8685-c9202d5ce61b.jpg" 
+                    alt="Автор сервера" 
+                    className="w-32 h-32 rounded-full border-4 border-red-500 shadow-lg shadow-red-500/50"
+                  />
+                  <div className="flex-1 text-center md:text-left space-y-2">
+                    <h3 className="text-2xl font-heading font-bold text-white">Создатель сервера</h3>
+                    <p className="text-gray-400">Основатель и разработчик Lyrium Server</p>
+                    <Badge className="bg-red-500/20 text-red-400 border border-red-500/50">
+                      <Icon name="Crown" size={14} className="mr-1" />
+                      Владелец
+                    </Badge>
+                  </div>
                 </div>
-                <p className="text-3xl font-heading font-bold">{stat.value}</p>
-                <p className="text-muted-foreground">{stat.label}</p>
               </CardContent>
             </Card>
-          ))}
-        </div>
-      </section>
+          </div>
 
-      <section className="container mx-auto px-4">
-        <Card className="border-border bg-gradient-to-br from-card to-primary/5 overflow-hidden">
-          <CardContent className="p-8">
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="flex-1 space-y-4">
-                <h2 className="text-3xl font-heading font-bold">Присоединяйся к Discord</h2>
-                <p className="text-muted-foreground text-lg">
-                  Общайся с игроками, участвуй в событиях и получай актуальные новости сервера
-                </p>
-                <Button size="lg" className="bg-[#5865F2] hover:bg-[#4752C4]">
-                  <Icon name="MessageCircle" size={20} className="mr-2" />
-                  Открыть Discord
+          <div className="text-center space-y-6 mb-12">
+            <h2 className="text-5xl font-heading font-bold">
+              <span className="bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
+                Донат привилегии
+              </span>
+            </h2>
+            <p className="text-gray-400 text-lg">
+              Поддержи сервер и получи эксклюзивные возможности
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
+            <Card className="relative bg-gradient-to-br from-gray-900 via-blue-950/20 to-black border-2 border-blue-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <CardContent className="p-8 space-y-6 relative">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Badge className="bg-blue-500/20 text-blue-400 border border-blue-500/50 mb-3">
+                      Посейдон
+                    </Badge>
+                    <h3 className="text-3xl font-heading font-bold text-white">1,599₽</h3>
+                    <p className="text-gray-400">навсегда</p>
+                  </div>
+                  <img 
+                    src="https://cdn.poehali.dev/files/cbd7462c-d182-41c6-8685-c9202d5ce61b.jpg" 
+                    alt="Посейдон" 
+                    className="w-24 h-24 rounded-xl border-2 border-blue-500 shadow-lg shadow-blue-500/50"
+                  />
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={18} className="text-blue-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300">Префикс [ПОСЕЙДОН]</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={18} className="text-blue-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300">Уникальные водные способности</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={18} className="text-blue-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300">Дыхание под водой</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={18} className="text-blue-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300">Трезубец Посейдона</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={18} className="text-blue-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300">Быстрое плавание</span>
+                  </div>
+                </div>
+
+                <Button 
+                  onClick={handleDonate}
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold text-lg py-6 shadow-lg shadow-blue-500/50"
+                >
+                  <Icon name="ShoppingCart" size={20} className="mr-2" />
+                  Купить Посейдон
                 </Button>
-              </div>
-              <div className="w-full md:w-auto">
-                <div className="bg-muted/30 rounded-lg p-6 space-y-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                    <span className="font-medium">1,847 участников онлайн</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-muted-foreground rounded-full" />
-                    <span className="text-muted-foreground">3,254 всего участников</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </section>
-
-      <section className="container mx-auto px-4">
-        <div className="text-center space-y-4 mb-12">
-          <h2 className="text-4xl font-heading font-bold">Особенности сервера</h2>
-          <p className="text-muted-foreground text-lg">Что делает Lyrium уникальным</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            { icon: 'Sword', title: 'Кастомные предметы', desc: 'Уникальное оружие и броня' },
-            { icon: 'Coins', title: 'Экономика', desc: 'Развитая система торговли' },
-            { icon: 'Castle', title: 'Приватные территории', desc: 'Защити свои постройки' },
-            { icon: 'Trophy', title: 'Ивенты', desc: 'Еженедельные мероприятия' },
-          ].map((feature, index) => (
-            <Card key={index} className="border-border bg-card/50 hover:bg-card transition-all hover:scale-105 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-              <CardContent className="p-6 space-y-3">
-                <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
-                  <Icon name={feature.icon as any} size={24} className="text-primary" />
-                </div>
-                <h3 className="font-heading font-semibold text-lg">{feature.title}</h3>
-                <p className="text-muted-foreground text-sm">{feature.desc}</p>
               </CardContent>
             </Card>
-          ))}
-        </div>
-      </section>
-    </div>
-  );
-}
 
-function DonateSection() {
-  const packages = [
-    {
-      name: 'VIP',
-      price: '199₽',
-      period: 'месяц',
-      features: ['Префикс [VIP]', 'Доступ к /fly', '5 приватных зон', 'Цветной ник'],
-      popular: false,
-    },
-    {
-      name: 'Premium',
-      price: '399₽',
-      period: 'месяц',
-      features: ['Префикс [PREMIUM]', 'Доступ к /fly и /tp', '15 приватных зон', 'Кастомные эффекты', 'Приоритет в очереди'],
-      popular: true,
-    },
-    {
-      name: 'Legend',
-      price: '699₽',
-      period: 'месяц',
-      features: ['Префикс [LEGEND]', 'Все команды Premium', '50 приватных зон', 'Уникальные скины', 'Доступ к эксклюзивным ивентам', 'Личный NPC'],
-      popular: false,
-    },
-  ];
-
-  return (
-    <div className="container mx-auto px-4 py-16 space-y-12">
-      <div className="text-center space-y-4 animate-fade-in">
-        <h1 className="text-5xl font-heading font-bold">Донат привилегии</h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Поддержи развитие сервера и получи уникальные возможности
-        </p>
-      </div>
-
-      <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        {packages.map((pkg, index) => (
-          <Card 
-            key={index} 
-            className={`relative border-2 transition-all hover:scale-105 animate-fade-in ${
-              pkg.popular 
-                ? 'border-primary bg-gradient-to-b from-primary/10 to-card' 
-                : 'border-border bg-card'
-            }`}
-            style={{ animationDelay: `${index * 0.1}s` }}
-          >
-            {pkg.popular && (
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                <Badge className="bg-gradient-to-r from-primary to-secondary">
-                  Популярный
+            <Card className="relative bg-gradient-to-br from-gray-900 via-yellow-950/20 to-black border-2 border-yellow-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+              <div className="absolute top-0 right-0">
+                <Badge className="bg-gradient-to-r from-red-500 to-yellow-500 text-white border-0 rounded-tl-none rounded-br-none px-4 py-2">
+                  ТОП ВЫБОР
                 </Badge>
               </div>
-            )}
-            
-            <CardContent className="p-8 space-y-6">
-              <div className="text-center space-y-2">
-                <h3 className="text-2xl font-heading font-bold">{pkg.name}</h3>
-                <div className="flex items-end justify-center gap-1">
-                  <span className="text-4xl font-heading font-bold">{pkg.price}</span>
-                  <span className="text-muted-foreground mb-1">/ {pkg.period}</span>
+              <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <CardContent className="p-8 space-y-6 relative">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Badge className="bg-yellow-500/20 text-yellow-400 border border-yellow-500/50 mb-3">
+                      EveryFly
+                    </Badge>
+                    <h3 className="text-3xl font-heading font-bold text-white">1,799₽</h3>
+                    <p className="text-gray-400">навсегда</p>
+                  </div>
+                  <img 
+                    src="https://cdn.poehali.dev/files/38fb2a9a-f34f-4440-875f-1069d481d322.jpg" 
+                    alt="EveryFly" 
+                    className="w-24 h-24 rounded-xl border-2 border-yellow-500 shadow-lg shadow-yellow-500/50"
+                  />
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300">Префикс [EVERYFLY]</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300">Полёт в режиме выживания</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300">Королевские крылья</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300">Уникальные эффекты полёта</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300">Доступ к эксклюзивным зонам</span>
+                  </div>
+                </div>
+
+                <Button 
+                  onClick={handleDonate}
+                  className="w-full bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-500 hover:to-yellow-600 text-white font-bold text-lg py-6 shadow-lg shadow-yellow-500/50"
+                >
+                  <Icon name="ShoppingCart" size={20} className="mr-2" />
+                  Купить EveryFly
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          <Card className="max-w-4xl mx-auto bg-gradient-to-r from-red-950/30 to-black border-2 border-red-500/30">
+            <CardContent className="p-8">
+              <div className="flex gap-4">
+                <Icon name="Info" size={24} className="text-red-500 flex-shrink-0 mt-1" />
+                <div className="space-y-3">
+                  <h3 className="font-heading font-bold text-xl text-white">Информация о донате</h3>
+                  <div className="space-y-2 text-gray-400">
+                    <p>• После нажатия кнопки вы будете перенаправлены в Telegram чат @LyriumMine</p>
+                    <p>• Все привилегии выдаются администратором после подтверждения оплаты</p>
+                    <p>• Донат не даёт преимущества в PvP, только уникальные возможности</p>
+                    <p>• Поддержка: свяжитесь с администрацией в Telegram</p>
+                  </div>
                 </div>
               </div>
-
-              <div className="space-y-3">
-                {pkg.features.map((feature, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <Icon name="Check" size={18} className="text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-sm">{feature}</span>
-                  </div>
-                ))}
-              </div>
-
-              <Button 
-                className={`w-full ${
-                  pkg.popular 
-                    ? 'bg-gradient-to-r from-primary to-secondary hover:opacity-90' 
-                    : 'bg-primary hover:bg-primary/90'
-                }`}
-              >
-                Купить {pkg.name}
-              </Button>
             </CardContent>
           </Card>
-        ))}
-      </div>
+        </section>
 
-      <Card className="max-w-4xl mx-auto border-border bg-card/50">
-        <CardContent className="p-8">
-          <h3 className="text-2xl font-heading font-bold mb-4">Информация о донате</h3>
-          <div className="space-y-2 text-muted-foreground">
-            <p>• Все привилегии активируются автоматически после оплаты</p>
-            <p>• Возврат средств возможен в течение 24 часов при технических проблемах</p>
-            <p>• Донат не дает преимущества в PvP, только качество жизни</p>
-            <p>• Поддержка доната: support@lyrium.ru</p>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
-}
-
-function RulesSection() {
-  const ruleCategories = [
-    {
-      title: 'Общие правила',
-      icon: 'Book',
-      rules: [
-        'Уважительное отношение ко всем игрокам',
-        'Запрещены оскорбления, мат и токсичное поведение',
-        'Запрещена реклама других серверов',
-        'Один аккаунт на одного игрока',
-      ],
-    },
-    {
-      title: 'Игровой процесс',
-      icon: 'Gamepad2',
-      rules: [
-        'Запрещено использование читов и модификаций',
-        'Гриферство запрещено на приватных территориях',
-        'Использование багов карается баном',
-        'Читерские текстурпаки запрещены (X-Ray и т.п.)',
-      ],
-    },
-    {
-      title: 'Постройки',
-      icon: 'Home',
-      rules: [
-        'Постройки должны быть приватизированы',
-        'Запрещено строить слишком близко к чужим постройкам',
-        'Лагающие фермы подлежат удалению',
-        'Неактивные базы (60+ дней) могут быть удалены',
-      ],
-    },
-    {
-      title: 'Торговля',
-      icon: 'ShoppingCart',
-      rules: [
-        'Запрещен обман при торговле',
-        'Цены должны быть адекватными',
-        'Запрещена продажа игровых ценностей за реальные деньги',
-        'Все споры решаются администрацией',
-      ],
-    },
-  ];
-
-  return (
-    <div className="container mx-auto px-4 py-16 space-y-12">
-      <div className="text-center space-y-4 animate-fade-in">
-        <h1 className="text-5xl font-heading font-bold">Правила сервера</h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Соблюдение правил обязательно для всех игроков
-        </p>
-      </div>
-
-      <Tabs defaultValue="all" className="max-w-5xl mx-auto">
-        <TabsList className="grid w-full grid-cols-5 mb-8">
-          <TabsTrigger value="all">Все</TabsTrigger>
-          {ruleCategories.map((cat, i) => (
-            <TabsTrigger key={i} value={cat.title}>{cat.title.split(' ')[0]}</TabsTrigger>
-          ))}
-        </TabsList>
-
-        <TabsContent value="all" className="space-y-6">
-          {ruleCategories.map((category, index) => (
-            <Card key={index} className="border-border bg-card/50 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-              <CardContent className="p-6 space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
-                    <Icon name={category.icon as any} size={20} className="text-primary" />
-                  </div>
-                  <h3 className="text-xl font-heading font-bold">{category.title}</h3>
+        <section className="container mx-auto px-4 py-16">
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <Card className="bg-gradient-to-br from-gray-900 to-black border border-red-500/20 hover:border-red-500/40 transition-all hover:scale-105">
+              <CardContent className="p-6 text-center space-y-3">
+                <div className="mx-auto w-14 h-14 rounded-full bg-red-500/20 flex items-center justify-center border border-red-500/30">
+                  <Icon name="Users" size={28} className="text-red-500" />
                 </div>
-                <ul className="space-y-2 ml-13">
-                  {category.rules.map((rule, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <Icon name="ChevronRight" size={18} className="text-primary mt-0.5 flex-shrink-0" />
-                      <span>{rule}</span>
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-3xl font-heading font-bold text-white">0/20</p>
+                <p className="text-gray-400">Игроков онлайн</p>
               </CardContent>
             </Card>
-          ))}
-        </TabsContent>
 
-        {ruleCategories.map((category, index) => (
-          <TabsContent key={index} value={category.title}>
-            <Card className="border-border bg-card/50">
-              <CardContent className="p-8 space-y-6">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
-                    <Icon name={category.icon as any} size={24} className="text-primary" />
-                  </div>
-                  <h3 className="text-2xl font-heading font-bold">{category.title}</h3>
+            <Card className="bg-gradient-to-br from-gray-900 to-black border border-red-500/20 hover:border-red-500/40 transition-all hover:scale-105">
+              <CardContent className="p-6 text-center space-y-3">
+                <div className="mx-auto w-14 h-14 rounded-full bg-red-500/20 flex items-center justify-center border border-red-500/30">
+                  <Icon name="Zap" size={28} className="text-red-500" />
                 </div>
-                <ul className="space-y-3">
-                  {category.rules.map((rule, i) => (
-                    <li key={i} className="flex items-start gap-3 p-3 rounded-lg bg-muted/30">
-                      <Icon name="CheckCircle2" size={20} className="text-primary mt-0.5 flex-shrink-0" />
-                      <span className="text-lg">{rule}</span>
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-3xl font-heading font-bold text-white">1.20.1</p>
+                <p className="text-gray-400">Версия</p>
               </CardContent>
             </Card>
-          </TabsContent>
-        ))}
-      </Tabs>
 
-      <Card className="max-w-4xl mx-auto border-destructive/50 bg-destructive/5">
-        <CardContent className="p-6">
-          <div className="flex gap-4">
-            <Icon name="AlertTriangle" size={24} className="text-destructive flex-shrink-0" />
-            <div className="space-y-2">
-              <h3 className="font-heading font-bold text-lg">Важно!</h3>
-              <p className="text-muted-foreground">
-                Незнание правил не освобождает от ответственности. За серьезные нарушения выдается бан без предупреждения.
-                Повторные нарушения увеличивают срок наказания.
-              </p>
-            </div>
+            <Card className="bg-gradient-to-br from-gray-900 to-black border border-red-500/20 hover:border-red-500/40 transition-all hover:scale-105">
+              <CardContent className="p-6 text-center space-y-3">
+                <div className="mx-auto w-14 h-14 rounded-full bg-red-500/20 flex items-center justify-center border border-red-500/30">
+                  <Icon name="Globe" size={28} className="text-red-500" />
+                </div>
+                <p className="text-3xl font-heading font-bold text-white">RU</p>
+                <p className="text-gray-400">Регион</p>
+              </CardContent>
+            </Card>
           </div>
-        </CardContent>
-      </Card>
+        </section>
+      </main>
+
+      <footer className="relative border-t border-red-900/30 py-8 mt-20">
+        <div className="container mx-auto px-4 text-center">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <img 
+              src="https://cdn.poehali.dev/files/6aaa4688-5762-4d13-96c1-778a00a8f135.jpg" 
+              alt="Lyrium" 
+              className="w-8 h-8 rounded border border-red-500/50"
+            />
+            <span className="text-xl font-heading font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
+              LYRIUM
+            </span>
+          </div>
+          <p className="text-gray-500">© 2025 Lyrium Server. Все права защищены.</p>
+        </div>
+      </footer>
     </div>
   );
 }
