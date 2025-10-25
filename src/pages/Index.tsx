@@ -133,7 +133,7 @@ export default function Index() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 max-w-7xl mx-auto mb-12">
             <Card className="relative bg-gradient-to-br from-gray-900 via-purple-950/20 to-black border-2 border-purple-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <CardContent className="p-6 space-y-4 relative">
@@ -216,6 +216,101 @@ export default function Index() {
                 >
                   <Icon name="ShoppingCart" size={18} className="mr-2" />
                   Купить Воин
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="relative bg-gradient-to-br from-gray-900 via-blue-950/20 to-black border-2 border-blue-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <CardContent className="p-6 space-y-4 relative">
+                <div className="text-center">
+                  <img 
+                    src="https://cdn.poehali.dev/files/cbd7462c-d182-41c6-8685-c9202d5ce61b.jpg" 
+                    alt="Посейдон" 
+                    className="w-full h-48 object-cover rounded-xl border-2 border-blue-500 shadow-lg shadow-blue-500/50 mb-4"
+                  />
+                  <Badge className="bg-blue-500/20 text-blue-400 border border-blue-500/50 mb-2">
+                    Посейдон
+                  </Badge>
+                  <h3 className="text-2xl font-heading font-bold text-white">1,599₽</h3>
+                  <p className="text-gray-400 text-sm">навсегда</p>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-blue-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Префикс ✮</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-blue-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Водные способности</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-blue-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Дыхание под водой</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-blue-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Трезубец Посейдона</span>
+                  </div>
+                </div>
+
+                <Button 
+                  onClick={handleDonate}
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold py-5 shadow-lg shadow-blue-500/50"
+                >
+                  <Icon name="ShoppingCart" size={18} className="mr-2" />
+                  Купить Посейдон
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="relative bg-gradient-to-br from-gray-900 via-yellow-950/20 to-black border-2 border-yellow-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <div className="absolute top-0 right-0">
+                <Badge className="bg-gradient-to-r from-red-500 to-yellow-500 text-white border-0 rounded-tl-none rounded-br-none px-3 py-1 text-xs">
+                  ТОП
+                </Badge>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <CardContent className="p-6 space-y-4 relative">
+                <div className="text-center">
+                  <img 
+                    src="https://cdn.poehali.dev/files/38fb2a9a-f34f-4440-875f-1069d481d322.jpg" 
+                    alt="EveryFly" 
+                    className="w-full h-48 object-cover rounded-xl border-2 border-yellow-500 shadow-lg shadow-yellow-500/50 mb-4"
+                  />
+                  <Badge className="bg-yellow-500/20 text-yellow-400 border border-yellow-500/50 mb-2">
+                    EveryFly
+                  </Badge>
+                  <h3 className="text-2xl font-heading font-bold text-white">1,799₽</h3>
+                  <p className="text-gray-400 text-sm">навсегда</p>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-yellow-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Префикс ➹</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-yellow-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Королевские крылья</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-yellow-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Эффекты полёта</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-yellow-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Эксклюзивные зоны</span>
+                  </div>
+                </div>
+
+                <Button 
+                  onClick={handleDonate}
+                  className="w-full bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-500 hover:to-yellow-600 text-white font-bold py-5 shadow-lg shadow-yellow-500/50"
+                >
+                  <Icon name="ShoppingCart" size={18} className="mr-2" />
+                  Купить EveryFly
                 </Button>
               </CardContent>
             </Card>
