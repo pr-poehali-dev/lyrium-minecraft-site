@@ -12,6 +12,7 @@ export default function MinecraftGame() {
   const [prefixCode, setPrefixCode] = useState('');
   const [codeCopied, setCodeCopied] = useState(false);
   const [pickaxeClicked, setPickaxeClicked] = useState(false);
+  const [swordClicked, setSwordClicked] = useState(false);
   
   const audioContextRef = useRef<AudioContext | null>(null);
   
@@ -20,6 +21,7 @@ export default function MinecraftGame() {
     playerVelocity: 0,
     obstacles: [] as { x: number; height: number; passed?: boolean }[],
     walls: [] as { x: number; y: number; health: number }[],
+    mobs: [] as { x: number; y: number; type: 'zombie' | 'skeleton' | 'creeper' }[],
     score: 0,
     isJumping: false,
     gameSpeed: 5
@@ -42,6 +44,8 @@ export default function MinecraftGame() {
     let animationFrame: number;
     let obstacleSpawnTimer = 0;
     let wallSpawnTimer = 0;
+    const mobSpawnTimer = 0;
+    const MOB_SIZE = 35;
 
     const resetGame = () => {
       gameStateRef.current = {
@@ -49,6 +53,7 @@ export default function MinecraftGame() {
         playerVelocity: 0,
         obstacles: [],
         walls: [],
+        mobs: [],
         score: 0,
         isJumping: false,
         gameSpeed: 5
@@ -73,6 +78,17 @@ export default function MinecraftGame() {
         x: canvas.width,
         y,
         health
+      });
+    };
+
+    const spawnMob = () => {
+      const types: ('zombie' | 'skeleton' | 'creeper')[] = ['zombie', 'skeleton', 'creeper'];
+      const type = types[Math.floor(Math.random() * types.length)];
+      const y = GROUND_Y - MOB_SIZE - Math.random() * 80;
+      gameStateRef.current.mobs.push({
+        x: canvas.width,
+        y,
+        type
       });
     };
 
@@ -156,8 +172,15 @@ export default function MinecraftGame() {
           wallSpawnTimer = 0;
         }
 
+        mobSpawnTimer++;
+        if (mobSpawnTimer > 120) {
+          spawnMob();
+          mobSpawnTimer = 0;
+        }
+
         state.obstacles = state.obstacles.filter(obs => obs.x > -OBSTACLE_WIDTH);
         state.walls = state.walls.filter(wall => wall.x > -WALL_SIZE && wall.health > 0);
+        state.mobs = state.mobs.filter(mob => mob.x > -MOB_SIZE);
 
         state.obstacles.forEach(obstacle => {
           obstacle.x -= state.gameSpeed;
@@ -261,6 +284,37 @@ export default function MinecraftGame() {
         ctx.fillText(wall.health.toString(), wall.x + WALL_SIZE / 2, wall.y + WALL_SIZE / 2 + 7);
       });
 
+      state.mobs.forEach(mob => {
+        mob.x -= state.gameSpeed;
+
+        if (mob.type === 'zombie') {
+          ctx.fillStyle = '#2d5016';
+          ctx.fillRect(mob.x, mob.y, MOB_SIZE, MOB_SIZE);
+          ctx.fillStyle = '#3a6b1e';
+          ctx.fillRect(mob.x + 5, mob.y + 5, MOB_SIZE - 10, MOB_SIZE - 10);
+          ctx.fillStyle = '#1a1a1a';
+          ctx.fillRect(mob.x + 8, mob.y + 10, 6, 6);
+          ctx.fillRect(mob.x + 21, mob.y + 10, 6, 6);
+        } else if (mob.type === 'skeleton') {
+          ctx.fillStyle = '#c0c0c0';
+          ctx.fillRect(mob.x, mob.y, MOB_SIZE, MOB_SIZE);
+          ctx.fillStyle = '#e0e0e0';
+          ctx.fillRect(mob.x + 5, mob.y + 5, MOB_SIZE - 10, MOB_SIZE - 10);
+          ctx.fillStyle = '#1a1a1a';
+          ctx.fillRect(mob.x + 8, mob.y + 10, 6, 6);
+          ctx.fillRect(mob.x + 21, mob.y + 10, 6, 6);
+        } else if (mob.type === 'creeper') {
+          ctx.fillStyle = '#0f5a0f';
+          ctx.fillRect(mob.x, mob.y, MOB_SIZE, MOB_SIZE);
+          ctx.fillStyle = '#17a317';
+          ctx.fillRect(mob.x + 5, mob.y + 5, MOB_SIZE - 10, MOB_SIZE - 10);
+          ctx.fillStyle = '#1a1a1a';
+          ctx.fillRect(mob.x + 8, mob.y + 10, 6, 6);
+          ctx.fillRect(mob.x + 21, mob.y + 10, 6, 6);
+          ctx.fillRect(mob.x + 12, mob.y + 20, 11, 8);
+        }
+      });
+
       if (gameOver) {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -307,6 +361,24 @@ export default function MinecraftGame() {
         setCoins(prev => prev + 2);
         playSound(150, 0.2, 'sawtooth');
       }
+    }
+  };
+
+  const handleSwordClick = () => {
+    if (gameOver) return;
+    
+    setSwordClicked(true);
+    setTimeout(() => setSwordClicked(false), 200);
+
+    const state = gameStateRef.current;
+    const closestMob = state.mobs.find(
+      mob => mob.x > 30 && mob.x < 150
+    );
+
+    if (closestMob) {
+      const mobIndex = state.mobs.indexOf(closestMob);
+      state.mobs.splice(mobIndex, 1);
+      playSound(350, 0.15, 'triangle');
     }
   };
 
@@ -386,6 +458,16 @@ export default function MinecraftGame() {
               >
                 <Icon name="Pickaxe" size={20} className="mr-2" />
                 Ломать стенки (⛏️)
+              </Button>
+              <Button
+                onClick={handleSwordClick}
+                disabled={gameOver}
+                className={`bg-gradient-to-r from-red-700 to-red-800 hover:from-red-600 hover:to-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl shadow-red-500/30 ${
+                  swordClicked ? 'scale-90' : 'scale-100 hover:scale-105'
+                }`}
+              >
+                <Icon name="Sword" size={20} className="mr-2" />
+                Убить моба (⚔️)
               </Button>
               <p className="text-gray-400 text-sm bg-black/30 px-4 py-2 rounded-lg border border-red-500/20">
                 Используй <span className="text-red-400 font-bold">SPACE</span> или клик для прыжка

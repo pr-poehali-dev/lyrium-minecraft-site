@@ -136,7 +136,7 @@ export default function Index() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 max-w-7xl mx-auto mb-12">
-            <Card className="relative bg-gradient-to-br from-gray-900 via-purple-950/20 to-black border-2 border-purple-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in">
+            <Card className="relative bg-gradient-to-br from-gray-900 via-purple-950/30 to-black border-2 border-purple-500/50 overflow-hidden group hover:scale-110 transition-all duration-300 animate-fade-in shadow-xl shadow-purple-500/20 hover:shadow-2xl hover:shadow-purple-500/40">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <CardContent className="p-6 space-y-4 relative">
                 <div className="text-center">
@@ -148,7 +148,7 @@ export default function Index() {
                   <Badge className="bg-purple-500/20 text-purple-400 border border-purple-500/50 mb-2">
                     Premium
                   </Badge>
-                  <h3 className="text-2xl font-heading font-bold text-white">45₽</h3>
+                  <h3 className="text-3xl font-heading font-bold bg-gradient-to-b from-purple-300 to-purple-500 bg-clip-text text-transparent">45₽</h3>
                   <p className="text-gray-400 text-sm">навсегда</p>
                 </div>
 
@@ -177,8 +177,9 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="relative bg-gradient-to-br from-gray-900 via-purple-950/20 to-black border-2 border-purple-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <Card className="relative bg-gradient-to-br from-gray-900 via-purple-950/30 to-black border-2 border-purple-500/50 overflow-hidden group hover:scale-110 transition-all duration-300 animate-fade-in shadow-xl shadow-purple-500/20 hover:shadow-2xl hover:shadow-purple-500/40" style={{ animationDelay: '0.2s' }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute top-0 right-0 w-20 h-20 bg-purple-500/20 rounded-full blur-3xl" />
               <CardContent className="p-6 space-y-4 relative">
                 <div className="text-center">
                   <img 
@@ -186,10 +187,10 @@ export default function Index() {
                     alt="Строитель" 
                     className="w-full h-48 object-contain rounded-xl border-2 border-purple-500 shadow-lg shadow-purple-500/50 mb-4 bg-gradient-to-br from-purple-950/30 to-black"
                   />
-                  <Badge className="bg-purple-500/20 text-purple-400 border border-purple-500/50 mb-2">
+                  <Badge className="bg-gradient-to-r from-purple-500/30 to-purple-600/30 text-purple-300 border-2 border-purple-400/60 mb-2 text-base font-bold shadow-lg">
                     Строитель
                   </Badge>
-                  <h3 className="text-2xl font-heading font-bold text-white">125₽</h3>
+                  <h3 className="text-3xl font-heading font-bold bg-gradient-to-b from-purple-300 to-purple-500 bg-clip-text text-transparent">125₽</h3>
                   <p className="text-gray-400 text-sm">навсегда</p>
                 </div>
 
@@ -214,7 +215,7 @@ export default function Index() {
 
                 <Button 
                   onClick={handleDonate}
-                  className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-bold py-5 shadow-lg shadow-purple-500/50"
+                  className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-bold py-5 shadow-lg shadow-purple-500/50 hover:shadow-xl hover:shadow-purple-500/60 transition-all hover:scale-105"
                 >
                   <Icon name="ShoppingCart" size={18} className="mr-2" />
                   Купить Строитель
@@ -222,8 +223,9 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="relative bg-gradient-to-br from-gray-900 via-red-950/20 to-black border-2 border-red-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <Card className="relative bg-gradient-to-br from-gray-900 via-red-950/30 to-black border-2 border-red-500/50 overflow-hidden group hover:scale-110 transition-all duration-300 animate-fade-in shadow-xl shadow-red-500/20 hover:shadow-2xl hover:shadow-red-500/40" style={{ animationDelay: '0.3s' }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute top-0 right-0 w-20 h-20 bg-red-500/20 rounded-full blur-3xl" />
               <CardContent className="p-6 space-y-4 relative">
                 <div className="text-center">
                   <img 
@@ -231,10 +233,10 @@ export default function Index() {
                     alt="Воин" 
                     className="w-full h-48 object-contain rounded-xl border-2 border-red-500 shadow-lg shadow-red-500/50 mb-4 bg-gradient-to-br from-red-950/30 to-black"
                   />
-                  <Badge className="bg-red-500/20 text-red-400 border border-red-500/50 mb-2">
+                  <Badge className="bg-gradient-to-r from-red-500/30 to-red-600/30 text-red-300 border-2 border-red-400/60 mb-2 text-base font-bold shadow-lg">
                     Воин
                   </Badge>
-                  <h3 className="text-2xl font-heading font-bold text-white">98₽</h3>
+                  <h3 className="text-3xl font-heading font-bold bg-gradient-to-b from-red-300 to-red-500 bg-clip-text text-transparent">98₽</h3>
                   <p className="text-gray-400 text-sm">навсегда</p>
                 </div>
 
@@ -259,7 +261,7 @@ export default function Index() {
 
                 <Button 
                   onClick={handleDonate}
-                  className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold py-5 shadow-lg shadow-red-500/50"
+                  className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold py-5 shadow-lg shadow-red-500/50 hover:shadow-xl hover:shadow-red-500/60 transition-all hover:scale-105"
                 >
                   <Icon name="ShoppingCart" size={18} className="mr-2" />
                   Купить Воин
@@ -267,8 +269,9 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="relative bg-gradient-to-br from-gray-900 via-blue-950/20 to-black border-2 border-blue-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <Card className="relative bg-gradient-to-br from-gray-900 via-blue-950/30 to-black border-2 border-blue-500/50 overflow-hidden group hover:scale-110 transition-all duration-300 animate-fade-in shadow-xl shadow-blue-500/20 hover:shadow-2xl hover:shadow-blue-500/40" style={{ animationDelay: '0.4s' }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute top-0 right-0 w-20 h-20 bg-blue-500/20 rounded-full blur-3xl" />
               <CardContent className="p-6 space-y-4 relative">
                 <div className="text-center">
                   <img 
@@ -276,10 +279,10 @@ export default function Index() {
                     alt="Посейдон" 
                     className="w-full h-48 object-contain rounded-xl border-2 border-blue-500 shadow-lg shadow-blue-500/50 mb-4 bg-gradient-to-br from-blue-950/30 to-black"
                   />
-                  <Badge className="bg-blue-500/20 text-blue-400 border border-blue-500/50 mb-2">
+                  <Badge className="bg-gradient-to-r from-blue-500/30 to-blue-600/30 text-blue-300 border-2 border-blue-400/60 mb-2 text-base font-bold shadow-lg">
                     Посейдон
                   </Badge>
-                  <h3 className="text-2xl font-heading font-bold text-white">1,599₽</h3>
+                  <h3 className="text-3xl font-heading font-bold bg-gradient-to-b from-blue-300 to-blue-500 bg-clip-text text-transparent">1,599₽</h3>
                   <p className="text-gray-400 text-sm">навсегда</p>
                 </div>
 
@@ -304,7 +307,7 @@ export default function Index() {
 
                 <Button 
                   onClick={handleDonate}
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold py-5 shadow-lg shadow-blue-500/50"
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold py-5 shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/60 transition-all hover:scale-105"
                 >
                   <Icon name="ShoppingCart" size={18} className="mr-2" />
                   Купить Посейдон
@@ -312,13 +315,14 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="relative bg-gradient-to-br from-gray-900 via-yellow-950/20 to-black border-2 border-yellow-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.5s' }}>
+            <Card className="relative bg-gradient-to-br from-gray-900 via-yellow-950/30 to-black border-2 border-yellow-500/50 overflow-hidden group hover:scale-110 transition-all duration-300 animate-fade-in shadow-xl shadow-yellow-500/20 hover:shadow-2xl hover:shadow-yellow-500/40" style={{ animationDelay: '0.5s' }}>
               <div className="absolute top-0 right-0">
                 <Badge className="bg-gradient-to-r from-red-500 to-yellow-500 text-white border-0 rounded-tl-none rounded-br-none px-3 py-1 text-xs">
                   ТОП
                 </Badge>
               </div>
-              <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute top-0 left-0 w-20 h-20 bg-yellow-500/20 rounded-full blur-3xl" />
               <CardContent className="p-6 space-y-4 relative">
                 <div className="text-center">
                   <img 
@@ -326,10 +330,10 @@ export default function Index() {
                     alt="EveryFly" 
                     className="w-full h-48 object-contain rounded-xl border-2 border-yellow-500 shadow-lg shadow-yellow-500/50 mb-4 bg-gradient-to-br from-yellow-950/30 to-black"
                   />
-                  <Badge className="bg-yellow-500/20 text-yellow-400 border border-yellow-500/50 mb-2">
+                  <Badge className="bg-gradient-to-r from-yellow-500/30 to-yellow-600/30 text-yellow-300 border-2 border-yellow-400/60 mb-2 text-base font-bold shadow-lg">
                     EveryFly
                   </Badge>
-                  <h3 className="text-2xl font-heading font-bold text-white">1,799₽</h3>
+                  <h3 className="text-3xl font-heading font-bold bg-gradient-to-b from-yellow-300 to-yellow-500 bg-clip-text text-transparent">1,799₽</h3>
                   <p className="text-gray-400 text-sm">навсегда</p>
                 </div>
 
@@ -354,7 +358,7 @@ export default function Index() {
 
                 <Button 
                   onClick={handleDonate}
-                  className="w-full bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-500 hover:to-yellow-600 text-white font-bold py-5 shadow-lg shadow-yellow-500/50"
+                  className="w-full bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-500 hover:to-yellow-600 text-white font-bold py-5 shadow-lg shadow-yellow-500/50 hover:shadow-xl hover:shadow-yellow-500/60 transition-all hover:scale-105"
                 >
                   <Icon name="ShoppingCart" size={18} className="mr-2" />
                   Купить EveryFly
