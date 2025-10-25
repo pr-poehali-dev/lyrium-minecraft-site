@@ -31,33 +31,36 @@ export default function Index() {
       
       <nav className="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-xl border-b border-red-900/30">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-3">
               <img 
                 src="https://cdn.poehali.dev/files/6aaa4688-5762-4d13-96c1-778a00a8f135.jpg" 
                 alt="Lyrium Logo" 
                 className="w-12 h-12 rounded-lg border-2 border-red-500 animate-glow"
               />
-              <span className="text-3xl font-heading font-bold bg-gradient-to-r from-red-500 via-red-600 to-red-500 bg-clip-text text-transparent">
+              <span className="text-2xl md:text-3xl font-heading font-bold bg-gradient-to-r from-red-500 via-red-600 to-red-500 bg-clip-text text-transparent">
                 LYRIUM
               </span>
             </div>
             
-            <div className="flex gap-4">
+            <div className="flex gap-2 md:gap-4">
               <Button 
                 onClick={handleChat}
                 variant="outline" 
+                size="sm"
                 className="border-red-500/50 text-red-500 hover:bg-red-500/10"
               >
-                <Icon name="MessageCircle" size={16} className="mr-2" />
-                Чат сервера
+                <Icon name="MessageCircle" size={16} className="mr-1 md:mr-2" />
+                <span className="hidden sm:inline">Чат сервера</span>
+                <span className="sm:hidden">Чат</span>
               </Button>
               <Button 
                 onClick={handleRules}
                 variant="outline" 
+                size="sm"
                 className="border-red-500/50 text-red-500 hover:bg-red-500/10"
               >
-                <Icon name="Book" size={16} className="mr-2" />
+                <Icon name="Book" size={16} className="mr-1 md:mr-2" />
                 Правила
               </Button>
             </div>
@@ -92,12 +95,6 @@ export default function Index() {
                 <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto">
                   Лучший приватный сервер в Minecraft с валютой и магазинами! Доброе комьюнити только у нас!
                 </p>
-
-                <div className="inline-block mt-4">
-                  <Badge className="bg-red-500/20 text-red-400 border border-red-500/50 text-lg px-4 py-2">
-                    Версия: 1.17
-                  </Badge>
-                </div>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
                   <div className="bg-gradient-to-r from-red-950/50 to-black border-2 border-red-500/30 rounded-xl px-8 py-4 font-mono text-xl backdrop-blur-sm">
