@@ -78,7 +78,7 @@ export default function Index() {
                 </h1>
                 
                 <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto">
-                  Легендарный Minecraft сервер с уникальными механиками и атмосферой
+                  Лучший приватный сервер с валютой
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
@@ -101,28 +101,6 @@ export default function Index() {
         </section>
 
         <section className="container mx-auto px-4 py-16">
-          <div className="max-w-3xl mx-auto mb-12">
-            <Card className="bg-gradient-to-br from-gray-900 to-black border-2 border-red-500/30 overflow-hidden">
-              <CardContent className="p-8">
-                <div className="flex flex-col md:flex-row items-center gap-6">
-                  <img 
-                    src="https://cdn.poehali.dev/files/cbd7462c-d182-41c6-8685-c9202d5ce61b.jpg" 
-                    alt="Автор сервера" 
-                    className="w-32 h-32 rounded-full border-4 border-red-500 shadow-lg shadow-red-500/50"
-                  />
-                  <div className="flex-1 text-center md:text-left space-y-2">
-                    <h3 className="text-2xl font-heading font-bold text-white">Создатель сервера</h3>
-                    <p className="text-gray-400">Основатель и разработчик Lyrium Server</p>
-                    <Badge className="bg-red-500/20 text-red-400 border border-red-500/50">
-                      <Icon name="Crown" size={14} className="mr-1" />
-                      Владелец
-                    </Badge>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
           <div className="text-center space-y-6 mb-12">
             <h2 className="text-5xl font-heading font-bold">
               <span className="bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
@@ -214,10 +192,7 @@ export default function Index() {
                     <Icon name="Check" size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
                     <span className="text-gray-300">Префикс [EVERYFLY]</span>
                   </div>
-                  <div className="flex items-start gap-2">
-                    <Icon name="Check" size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
-                    <span className="text-gray-300">Полёт в режиме выживания</span>
-                  </div>
+
                   <div className="flex items-start gap-2">
                     <Icon name="Check" size={18} className="text-yellow-400 mt-1 flex-shrink-0" />
                     <span className="text-gray-300">Королевские крылья</span>
