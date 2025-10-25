@@ -21,6 +21,10 @@ export default function Index() {
     window.open('https://t.me/+AoYEDChPREJkMjg6', '_blank');
   };
 
+  const handleChat = () => {
+    window.open('https://t.me/+AoYEDChPREJkMjg6', '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="fixed inset-0 bg-gradient-to-b from-red-950/20 via-black to-black pointer-events-none" />
@@ -40,6 +44,14 @@ export default function Index() {
             </div>
             
             <div className="flex gap-4">
+              <Button 
+                onClick={handleChat}
+                variant="outline" 
+                className="border-red-500/50 text-red-500 hover:bg-red-500/10"
+              >
+                <Icon name="MessageCircle" size={16} className="mr-2" />
+                Чат сервера
+              </Button>
               <Button 
                 onClick={handleRules}
                 variant="outline" 
