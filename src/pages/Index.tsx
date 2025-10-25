@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
+import MinecraftGame from '@/components/MinecraftGame';
 
 export default function Index() {
   const [copied, setCopied] = useState(false);
@@ -175,7 +176,52 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="relative bg-gradient-to-br from-gray-900 via-red-950/20 to-black border-2 border-red-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <Card className="relative bg-gradient-to-br from-gray-900 via-purple-950/20 to-black border-2 border-purple-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <CardContent className="p-6 space-y-4 relative">
+                <div className="text-center">
+                  <img 
+                    src="https://cdn.poehali.dev/files/f4e90f5e-0e02-4a89-b1e0-8bcb0614ceee.jpg" 
+                    alt="Строитель" 
+                    className="w-full h-48 object-cover rounded-xl border-2 border-purple-500 shadow-lg shadow-purple-500/50 mb-4"
+                  />
+                  <Badge className="bg-purple-500/20 text-purple-400 border border-purple-500/50 mb-2">
+                    Строитель
+                  </Badge>
+                  <h3 className="text-2xl font-heading font-bold text-white">599₽</h3>
+                  <p className="text-gray-400 text-sm">навсегда</p>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-purple-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Префикс ☐</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-purple-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Эксклюзивные блоки</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-purple-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">Режим полёта</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-purple-400 mt-1 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm">WorldEdit лайт</span>
+                  </div>
+                </div>
+
+                <Button 
+                  onClick={handleDonate}
+                  className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-bold py-5 shadow-lg shadow-purple-500/50"
+                >
+                  <Icon name="ShoppingCart" size={18} className="mr-2" />
+                  Купить Строитель
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="relative bg-gradient-to-br from-gray-900 via-red-950/20 to-black border-2 border-red-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.3s' }}>
               <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <CardContent className="p-6 space-y-4 relative">
                 <div className="text-center">
@@ -220,7 +266,7 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="relative bg-gradient-to-br from-gray-900 via-blue-950/20 to-black border-2 border-blue-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+            <Card className="relative bg-gradient-to-br from-gray-900 via-blue-950/20 to-black border-2 border-blue-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.4s' }}>
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <CardContent className="p-6 space-y-4 relative">
                 <div className="text-center">
@@ -265,7 +311,7 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <Card className="relative bg-gradient-to-br from-gray-900 via-yellow-950/20 to-black border-2 border-yellow-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <Card className="relative bg-gradient-to-br from-gray-900 via-yellow-950/20 to-black border-2 border-yellow-500/30 overflow-hidden group hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.5s' }}>
               <div className="absolute top-0 right-0">
                 <Badge className="bg-gradient-to-r from-red-500 to-yellow-500 text-white border-0 rounded-tl-none rounded-br-none px-3 py-1 text-xs">
                   ТОП
@@ -366,6 +412,10 @@ export default function Index() {
               </CardContent>
             </Card>
           </div>
+        </section>
+
+        <section className="container mx-auto px-4 py-16">
+          <MinecraftGame />
         </section>
       </main>
 
