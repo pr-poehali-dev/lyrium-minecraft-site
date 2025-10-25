@@ -6,9 +6,13 @@ import Icon from '@/components/ui/icon';
 export default function MinecraftGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [score, setScore] = useState(0);
+  const [coins, setCoins] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [playerName, setPlayerName] = useState('');
   const [showNameInput, setShowNameInput] = useState(false);
+  const [showPrefixShop, setShowPrefixShop] = useState(false);
+  const [prefixCode, setPrefixCode] = useState('');
+  const [codeCopied, setCodeCopied] = useState(false);
   const [leaderboard, setLeaderboard] = useState<{ name: string; score: number }[]>([
     { name: 'Steve', score: 45 },
     { name: 'Alex', score: 38 },
@@ -142,6 +146,10 @@ export default function MinecraftGame() {
             state.score++;
             setScore(state.score);
             
+            if (state.score % 5 === 0) {
+              setCoins(prev => prev + 1);
+            }
+            
             if (state.score % 10 === 0) {
               state.gameSpeed += 0.5;
             }
@@ -221,6 +229,22 @@ export default function MinecraftGame() {
     }
   };
 
+  const buyPrefix = () => {
+    if (coins >= 20) {
+      setCoins(prev => prev - 20);
+      const codes = ['HDHUDIE', 'DBDIDIE', 'SGADOC'];
+      const randomCode = codes[Math.floor(Math.random() * codes.length)];
+      setPrefixCode(randomCode);
+      setShowPrefixShop(true);
+    }
+  };
+
+  const copyCode = () => {
+    navigator.clipboard.writeText(prefixCode);
+    setCodeCopied(true);
+    setTimeout(() => setCodeCopied(false), 2000);
+  };
+
   return (
     <div className="space-y-8">
       <Card className="bg-gradient-to-br from-gray-900 to-black border-2 border-red-500/30">
@@ -229,10 +253,14 @@ export default function MinecraftGame() {
             <h3 className="text-2xl font-heading font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
               🎮 Minecraft Runner
             </h3>
-            <div className="flex justify-center">
+            <div className="flex justify-center gap-4">
               <div className="bg-red-950/30 border border-red-500/30 rounded-lg px-6 py-3">
                 <p className="text-sm text-gray-400">Счёт</p>
                 <p className="text-4xl font-bold text-red-500">{score}</p>
+              </div>
+              <div className="bg-yellow-950/30 border border-yellow-500/30 rounded-lg px-6 py-3">
+                <p className="text-sm text-gray-400">Монеты</p>
+                <p className="text-4xl font-bold text-yellow-500">{coins}</p>
               </div>
             </div>
             <canvas
@@ -241,9 +269,54 @@ export default function MinecraftGame() {
               height={300}
               className="w-full max-w-full border-2 border-red-500/50 rounded-lg"
             />
-            <p className="text-gray-400 text-sm">
-              Нажми SPACE или кликни для прыжка
-            </p>
+            <div className="space-y-2">
+              <p className="text-gray-400 text-sm">
+                Нажми SPACE или кликни для прыжка
+              </p>
+              <p className="text-yellow-400 text-sm font-medium">
+                ⚡ За каждые 5 очков = 1 монета
+              </p>
+              <Button
+                onClick={buyPrefix}
+                disabled={coins < 20}
+                className="bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-500 hover:to-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <Icon name="Star" size={18} className="mr-2" />
+                Купить префикс ✢ (20 монет)
+              </Button>
+            </div>
+
+            {showPrefixShop && (
+              <div className="bg-yellow-950/30 border border-yellow-500/30 rounded-lg p-4 space-y-3">
+                <div className="text-center space-y-2">
+                  <Icon name="Star" size={32} className="text-yellow-500 mx-auto" />
+                  <p className="text-white font-bold text-lg">Префикс ✢ куплен!</p>
+                  <div className="bg-black border border-yellow-500/50 rounded-lg p-3">
+                    <p className="text-gray-400 text-sm mb-2">Твой код:</p>
+                    <p className="text-yellow-500 text-2xl font-mono font-bold">{prefixCode}</p>
+                  </div>
+                </div>
+                <Button
+                  onClick={copyCode}
+                  className="w-full bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-500 hover:to-yellow-600"
+                >
+                  <Icon name={codeCopied ? "Check" : "Copy"} size={18} className="mr-2" />
+                  {codeCopied ? 'Скопировано!' : 'Скопировать код'}
+                </Button>
+                <div className="bg-red-950/30 border border-red-500/30 rounded-lg p-3">
+                  <p className="text-white text-sm">
+                    📌 Чтобы получить префикс, напиши код в <a href="https://t.me/LyriumMine" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 underline">@LyriumMine</a>
+                  </p>
+                </div>
+                <Button
+                  onClick={() => setShowPrefixShop(false)}
+                  variant="outline"
+                  className="w-full border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10"
+                >
+                  Закрыть
+                </Button>
+              </div>
+            )}
 
             {showNameInput && (
               <div className="bg-red-950/30 border border-red-500/30 rounded-lg p-4 space-y-3">
