@@ -139,19 +139,21 @@ export default function Index() {
             <Card className="relative bg-gradient-to-br from-gray-900 via-purple-950/30 to-black border-2 border-purple-500/50 overflow-hidden group hover:scale-110 transition-all duration-300 animate-fade-in shadow-xl shadow-purple-500/20 hover:shadow-2xl hover:shadow-purple-500/40">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               {/* Minecraft particles */}
-              <div className="minecraft-particle" style={{ top: '10%', left: '5%', animationDelay: '0s' }}>💎</div>
-              <div className="minecraft-particle" style={{ top: '25%', right: '8%', animationDelay: '0.5s' }}>⭐</div>
-              <div className="minecraft-particle" style={{ bottom: '30%', left: '3%', animationDelay: '1s' }}>✨</div>
-              <div className="minecraft-particle" style={{ bottom: '15%', right: '5%', animationDelay: '1.5s' }}>🎁</div>
-              <div className="minecraft-particle" style={{ top: '40%', left: '2%', animationDelay: '2s' }}>🌟</div>
-              <div className="minecraft-particle" style={{ top: '60%', right: '3%', animationDelay: '2.5s' }}>👑</div>
+              <div className="minecraft-particle text-purple-400" style={{ top: '10%', left: '5%', animationDelay: '0s' }}>◆</div>
+              <div className="minecraft-particle text-purple-300" style={{ top: '25%', right: '8%', animationDelay: '0.5s' }}>✦</div>
+              <div className="minecraft-particle text-purple-500" style={{ bottom: '30%', left: '3%', animationDelay: '1s' }}>▣</div>
+              <div className="minecraft-particle text-purple-400" style={{ bottom: '15%', right: '5%', animationDelay: '1.5s' }}>◈</div>
+              <div className="minecraft-particle text-purple-300" style={{ top: '40%', left: '2%', animationDelay: '2s' }}>❖</div>
+              <div className="minecraft-particle text-purple-500" style={{ top: '60%', right: '3%', animationDelay: '2.5s' }}>♦</div>
               <CardContent className="p-6 space-y-4 relative z-10">
                 <div className="text-center">
-                  <img 
-                    src="https://cdn.poehali.dev/files/529276fb-e401-4762-8426-dfeb7dccfc39.jpg" 
-                    alt="Premium" 
-                    className="w-full h-48 object-contain rounded-xl border-2 border-purple-500 shadow-lg shadow-purple-500/50 mb-4 bg-gradient-to-br from-purple-950/30 to-black"
-                  />
+                  <div className="minecraft-frame text-purple-500">
+                    <img 
+                      src="https://cdn.poehali.dev/files/529276fb-e401-4762-8426-dfeb7dccfc39.jpg" 
+                      alt="Premium" 
+                      className="w-full h-48 object-contain rounded-xl border-2 border-purple-500 shadow-lg shadow-purple-500/50 mb-4 bg-gradient-to-br from-purple-950/30 to-black relative z-0"
+                    />
+                  </div>
                   <Badge className="bg-purple-500/20 text-purple-400 border border-purple-500/50 mb-2 title-glow">
                     Premium
                   </Badge>
@@ -188,19 +190,21 @@ export default function Index() {
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="absolute top-0 right-0 w-20 h-20 bg-purple-500/20 rounded-full blur-3xl" />
               {/* Minecraft particles */}
-              <div className="minecraft-particle" style={{ top: '10%', left: '5%', animationDelay: '0s' }}>🧱</div>
-              <div className="minecraft-particle" style={{ top: '20%', right: '8%', animationDelay: '0.5s' }}>⛏️</div>
-              <div className="minecraft-particle" style={{ bottom: '30%', left: '3%', animationDelay: '1s' }}>🪵</div>
-              <div className="minecraft-particle" style={{ bottom: '15%', right: '5%', animationDelay: '1.5s' }}>🔨</div>
-              <div className="minecraft-particle" style={{ top: '40%', left: '2%', animationDelay: '2s' }}>🏗️</div>
-              <div className="minecraft-particle" style={{ top: '60%', right: '3%', animationDelay: '2.5s' }}>📐</div>
+              <div className="minecraft-particle text-purple-400" style={{ top: '10%', left: '5%', animationDelay: '0s' }}>▣</div>
+              <div className="minecraft-particle text-purple-300" style={{ top: '20%', right: '8%', animationDelay: '0.5s' }}>⛏</div>
+              <div className="minecraft-particle text-purple-500" style={{ bottom: '30%', left: '3%', animationDelay: '1s' }}>▦</div>
+              <div className="minecraft-particle text-purple-400" style={{ bottom: '15%', right: '5%', animationDelay: '1.5s' }}>⚒</div>
+              <div className="minecraft-particle text-purple-300" style={{ top: '40%', left: '2%', animationDelay: '2s' }}>■</div>
+              <div className="minecraft-particle text-purple-500" style={{ top: '60%', right: '3%', animationDelay: '2.5s' }}>▨</div>
               <CardContent className="p-6 space-y-4 relative z-10">
                 <div className="text-center">
-                  <img 
-                    src="https://cdn.poehali.dev/files/21c9c387-c6a4-4cc7-b30b-47e8cab985c3.jpg" 
-                    alt="Строитель" 
-                    className="w-full h-48 object-contain rounded-xl border-2 border-purple-500 shadow-lg shadow-purple-500/50 mb-4 bg-gradient-to-br from-purple-950/30 to-black"
-                  />
+                  <div className="minecraft-frame text-purple-500">
+                    <img 
+                      src="https://cdn.poehali.dev/files/21c9c387-c6a4-4cc7-b30b-47e8cab985c3.jpg" 
+                      alt="Строитель" 
+                      className="w-full h-48 object-contain rounded-xl border-2 border-purple-500 shadow-lg shadow-purple-500/50 mb-4 bg-gradient-to-br from-purple-950/30 to-black relative z-0"
+                    />
+                  </div>
                   <Badge className="bg-gradient-to-r from-purple-500/30 to-purple-600/30 text-purple-300 border-2 border-purple-400/60 mb-2 text-base font-bold shadow-lg title-glow">
                     Строитель
                   </Badge>
@@ -241,19 +245,21 @@ export default function Index() {
               <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="absolute top-0 right-0 w-20 h-20 bg-red-500/20 rounded-full blur-3xl" />
               {/* Minecraft particles */}
-              <div className="minecraft-particle" style={{ top: '10%', left: '5%', animationDelay: '0s' }}>⚔️</div>
-              <div className="minecraft-particle" style={{ top: '25%', right: '8%', animationDelay: '0.5s' }}>🛡️</div>
-              <div className="minecraft-particle" style={{ bottom: '30%', left: '3%', animationDelay: '1s' }}>💀</div>
-              <div className="minecraft-particle" style={{ bottom: '15%', right: '5%', animationDelay: '1.5s' }}>⚡</div>
-              <div className="minecraft-particle" style={{ top: '40%', left: '2%', animationDelay: '2s' }}>🔥</div>
-              <div className="minecraft-particle" style={{ top: '60%', right: '3%', animationDelay: '2.5s' }}>💪</div>
+              <div className="minecraft-particle text-red-400" style={{ top: '10%', left: '5%', animationDelay: '0s' }}>⚔</div>
+              <div className="minecraft-particle text-red-300" style={{ top: '25%', right: '8%', animationDelay: '0.5s' }}>⛨</div>
+              <div className="minecraft-particle text-red-500" style={{ bottom: '30%', left: '3%', animationDelay: '1s' }}>☠</div>
+              <div className="minecraft-particle text-red-400" style={{ bottom: '15%', right: '5%', animationDelay: '1.5s' }}>⚡</div>
+              <div className="minecraft-particle text-red-300" style={{ top: '40%', left: '2%', animationDelay: '2s' }}>✹</div>
+              <div className="minecraft-particle text-red-500" style={{ top: '60%', right: '3%', animationDelay: '2.5s' }}>⚑</div>
               <CardContent className="p-6 space-y-4 relative z-10">
                 <div className="text-center">
-                  <img 
-                    src="https://cdn.poehali.dev/files/8f712e9d-950b-4e99-a7b9-4585b3c48f76.jpg" 
-                    alt="Воин" 
-                    className="w-full h-48 object-contain rounded-xl border-2 border-red-500 shadow-lg shadow-red-500/50 mb-4 bg-gradient-to-br from-red-950/30 to-black"
-                  />
+                  <div className="minecraft-frame text-red-500">
+                    <img 
+                      src="https://cdn.poehali.dev/files/8f712e9d-950b-4e99-a7b9-4585b3c48f76.jpg" 
+                      alt="Воин" 
+                      className="w-full h-48 object-contain rounded-xl border-2 border-red-500 shadow-lg shadow-red-500/50 mb-4 bg-gradient-to-br from-red-950/30 to-black relative z-0"
+                    />
+                  </div>
                   <Badge className="bg-gradient-to-r from-red-500/30 to-red-600/30 text-red-300 border-2 border-red-400/60 mb-2 text-base font-bold shadow-lg title-glow">
                     Воин
                   </Badge>
@@ -294,19 +300,21 @@ export default function Index() {
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="absolute top-0 right-0 w-20 h-20 bg-blue-500/20 rounded-full blur-3xl" />
               {/* Minecraft particles */}
-              <div className="minecraft-particle" style={{ top: '10%', left: '5%', animationDelay: '0s' }}>🌊</div>
-              <div className="minecraft-particle" style={{ top: '25%', right: '8%', animationDelay: '0.5s' }}>🔱</div>
-              <div className="minecraft-particle" style={{ bottom: '30%', left: '3%', animationDelay: '1s' }}>💧</div>
-              <div className="minecraft-particle" style={{ bottom: '15%', right: '5%', animationDelay: '1.5s' }}>🐟</div>
-              <div className="minecraft-particle" style={{ top: '40%', left: '2%', animationDelay: '2s' }}>🌀</div>
-              <div className="minecraft-particle" style={{ top: '60%', right: '3%', animationDelay: '2.5s' }}>⚓</div>
+              <div className="minecraft-particle text-blue-400" style={{ top: '10%', left: '5%', animationDelay: '0s' }}>≋</div>
+              <div className="minecraft-particle text-blue-300" style={{ top: '25%', right: '8%', animationDelay: '0.5s' }}>🔱</div>
+              <div className="minecraft-particle text-blue-500" style={{ bottom: '30%', left: '3%', animationDelay: '1s' }}>◉</div>
+              <div className="minecraft-particle text-blue-400" style={{ bottom: '15%', right: '5%', animationDelay: '1.5s' }}>⊙</div>
+              <div className="minecraft-particle text-blue-300" style={{ top: '40%', left: '2%', animationDelay: '2s' }}>◎</div>
+              <div className="minecraft-particle text-blue-500" style={{ top: '60%', right: '3%', animationDelay: '2.5s' }}>⚓</div>
               <CardContent className="p-6 space-y-4 relative z-10">
                 <div className="text-center">
-                  <img 
-                    src="https://cdn.poehali.dev/files/cbd7462c-d182-41c6-8685-c9202d5ce61b.jpg" 
-                    alt="Посейдон" 
-                    className="w-full h-48 object-contain rounded-xl border-2 border-blue-500 shadow-lg shadow-blue-500/50 mb-4 bg-gradient-to-br from-blue-950/30 to-black"
-                  />
+                  <div className="minecraft-frame text-blue-500">
+                    <img 
+                      src="https://cdn.poehali.dev/files/cbd7462c-d182-41c6-8685-c9202d5ce61b.jpg" 
+                      alt="Посейдон" 
+                      className="w-full h-48 object-contain rounded-xl border-2 border-blue-500 shadow-lg shadow-blue-500/50 mb-4 bg-gradient-to-br from-blue-950/30 to-black relative z-0"
+                    />
+                  </div>
                   <Badge className="bg-gradient-to-r from-blue-500/30 to-blue-600/30 text-blue-300 border-2 border-blue-400/60 mb-2 text-base font-bold shadow-lg title-glow">
                     Посейдон
                   </Badge>
@@ -352,19 +360,21 @@ export default function Index() {
               <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="absolute top-0 left-0 w-20 h-20 bg-yellow-500/20 rounded-full blur-3xl" />
               {/* Minecraft particles */}
-              <div className="minecraft-particle" style={{ top: '15%', left: '5%', animationDelay: '0s' }}>🪽</div>
-              <div className="minecraft-particle" style={{ top: '25%', right: '8%', animationDelay: '0.5s' }}>✨</div>
-              <div className="minecraft-particle" style={{ bottom: '30%', left: '3%', animationDelay: '1s' }}>👑</div>
-              <div className="minecraft-particle" style={{ bottom: '15%', right: '5%', animationDelay: '1.5s' }}>🌟</div>
-              <div className="minecraft-particle" style={{ top: '40%', left: '2%', animationDelay: '2s' }}>🌈</div>
-              <div className="minecraft-particle" style={{ top: '60%', right: '3%', animationDelay: '2.5s' }}>🚀</div>
+              <div className="minecraft-particle text-yellow-400" style={{ top: '15%', left: '5%', animationDelay: '0s' }}>▲</div>
+              <div className="minecraft-particle text-yellow-300" style={{ top: '25%', right: '8%', animationDelay: '0.5s' }}>✦</div>
+              <div className="minecraft-particle text-yellow-500" style={{ bottom: '30%', left: '3%', animationDelay: '1s' }}>♔</div>
+              <div className="minecraft-particle text-yellow-400" style={{ bottom: '15%', right: '5%', animationDelay: '1.5s' }}>✹</div>
+              <div className="minecraft-particle text-yellow-300" style={{ top: '40%', left: '2%', animationDelay: '2s' }}>◊</div>
+              <div className="minecraft-particle text-yellow-500" style={{ top: '60%', right: '3%', animationDelay: '2.5s' }}>◈</div>
               <CardContent className="p-6 space-y-4 relative z-10">
                 <div className="text-center">
-                  <img 
-                    src="https://cdn.poehali.dev/files/38fb2a9a-f34f-4440-875f-1069d481d322.jpg" 
-                    alt="EveryFly" 
-                    className="w-full h-48 object-contain rounded-xl border-2 border-yellow-500 shadow-lg shadow-yellow-500/50 mb-4 bg-gradient-to-br from-yellow-950/30 to-black"
-                  />
+                  <div className="minecraft-frame text-yellow-500">
+                    <img 
+                      src="https://cdn.poehali.dev/files/38fb2a9a-f34f-4440-875f-1069d481d322.jpg" 
+                      alt="EveryFly" 
+                      className="w-full h-48 object-contain rounded-xl border-2 border-yellow-500 shadow-lg shadow-yellow-500/50 mb-4 bg-gradient-to-br from-yellow-950/30 to-black relative z-0"
+                    />
+                  </div>
                   <Badge className="bg-gradient-to-r from-yellow-500/30 to-yellow-600/30 text-yellow-300 border-2 border-yellow-400/60 mb-2 text-base font-bold shadow-lg title-glow">
                     EveryFly
                   </Badge>
