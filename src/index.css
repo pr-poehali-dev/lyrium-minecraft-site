@@ -57,3 +57,52 @@
     font-family: "Montserrat", sans-serif;
   }
 }
+
+@keyframes float-particles {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-10px) translateX(5px) rotate(90deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-5px) translateX(-5px) rotate(180deg);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translateY(5px) translateX(10px) rotate(270deg);
+    opacity: 0.5;
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    text-shadow:
+      0 0 10px currentColor,
+      0 0 20px currentColor;
+    transform: scale(1);
+  }
+  50% {
+    text-shadow:
+      0 0 20px currentColor,
+      0 0 30px currentColor,
+      0 0 40px currentColor;
+    transform: scale(1.05);
+  }
+}
+
+.minecraft-particle {
+  position: absolute;
+  font-size: 1.5rem;
+  pointer-events: none;
+  animation: float-particles 4s ease-in-out infinite;
+  user-select: none;
+}
+
+.title-glow {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
