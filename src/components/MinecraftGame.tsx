@@ -21,7 +21,7 @@ export default function MinecraftGame() {
     playerVelocity: 0,
     obstacles: [] as { x: number; height: number; passed?: boolean }[],
     walls: [] as { x: number; y: number; health: number }[],
-    mobs: [] as { x: number; y: number; type: 'zombie' | 'skeleton' | 'creeper' }[],
+    mobs: [] as { x: number; y: number; type: 'zombie' | 'skeleton' | 'creeper'; passed?: boolean }[],
     score: 0,
     isJumping: false,
     gameSpeed: 5
@@ -88,7 +88,8 @@ export default function MinecraftGame() {
       gameStateRef.current.mobs.push({
         x: canvas.width,
         y,
-        type
+        type,
+        passed: false
       });
     };
 
@@ -180,6 +181,15 @@ export default function MinecraftGame() {
 
         state.obstacles = state.obstacles.filter(obs => obs.x > -OBSTACLE_WIDTH);
         state.walls = state.walls.filter(wall => wall.x > -WALL_SIZE && wall.health > 0);
+        
+        state.mobs.forEach(mob => {
+          if (mob.x + MOB_SIZE < 0 && !mob.passed) {
+            mob.passed = true;
+            setCoins(prev => Math.max(0, prev - 1));
+            playSound(200, 0.15, 'sawtooth');
+          }
+        });
+        
         state.mobs = state.mobs.filter(mob => mob.x > -MOB_SIZE);
 
         state.obstacles.forEach(obstacle => {
