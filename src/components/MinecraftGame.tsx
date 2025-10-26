@@ -44,7 +44,7 @@ export default function MinecraftGame() {
     let animationFrame: number;
     let obstacleSpawnTimer = 0;
     let wallSpawnTimer = 0;
-    const mobSpawnTimer = 0;
+    let mobSpawnTimer = 0;
     const MOB_SIZE = 35;
 
     const resetGame = () => {
